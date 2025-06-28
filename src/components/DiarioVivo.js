@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import apiService from '../config/api';
-import topNavigation from './TTopNavigation'; // ✅ CORREGIR AQUÍ
+import TopNavigation from './TopNavigation'; // ✅ CAMBIAR: topNavigation por TopNavigation
 import '../styles/FixOverlay.css';
 
 function DiarioVivo({ onLogout }) {
@@ -96,7 +96,7 @@ function DiarioVivo({ onLogout }) {
 
   return (
     <>
-      <topNavigation onLogout={onLogout} />
+      <TopNavigation onLogout={onLogout} /> {/* ✅ CAMBIAR: <topNavigation> por <TopNavigation> */}
       <Container fluid className="py-4">
         <div className="text-center mb-5">
           <div className="diario-container">

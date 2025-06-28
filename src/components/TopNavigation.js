@@ -1,11 +1,12 @@
-// src/components/topNavigation.js - ARCHIVO COMPLETO
+// src/components/TopNavigation.js - CORREGIR FUNCIÓN
 import React from 'react';
 import { Container, Navbar, Nav, Button, Dropdown } from 'react-bootstrap';
 import { useNavigate, useLocation } from 'react-router-dom';
 import authService from '../services/authService';
 import '../styles/FixOverlay.css';
 
-function topNavigation({ onLogout }) {
+// ✅ CAMBIAR: function topNavigation por function TopNavigation
+function TopNavigation({ onLogout }) {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -338,4 +339,4 @@ function topNavigation({ onLogout }) {
   );
 }
 
-export default topNavigation;
+export default TopNavigation;
