@@ -1,5 +1,5 @@
 # Etapa de construcción
-FROM node:18-alpine as build
+FROM node:18-alpine AS build
 
 # Establecer directorio de trabajo
 WORKDIR /app
@@ -7,8 +7,8 @@ WORKDIR /app
 # Copiar archivos de dependencias
 COPY package*.json ./
 
-# Instalar dependencias
-RUN npm ci --only=production
+# Instalar dependencias (incluyendo dev dependencies para build)
+RUN npm ci
 
 # Copiar código fuente
 COPY . .

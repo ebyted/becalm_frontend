@@ -5,10 +5,10 @@ yarn-error.log*
 .git
 .gitignore
 README.md
-.env
 .nyc_output
 coverage
 .DS_Store
 *.log
 .vscode
 .idea
+build
