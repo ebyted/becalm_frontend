@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import apiService from '../config/api';
-import TopNavigation from './TopNavigation'; // ✅ CAMBIAR: topNavigation por TopNavigation
+import TopNavigation from './TopNavigation';
 import '../styles/FixOverlay.css';
 
 function DiarioVivo({ onLogout }) {
@@ -16,7 +16,6 @@ function DiarioVivo({ onLogout }) {
     if (savedEntries) {
       try {
         const parsedEntries = JSON.parse(savedEntries);
-        // Convertir timestamps de string a Date
         const entriesWithDates = parsedEntries.map(entry => ({
           ...entry,
           timestamp: new Date(entry.timestamp)
@@ -42,7 +41,6 @@ function DiarioVivo({ onLogout }) {
     setError('');
 
     try {
-      // Intentar obtener reflexión de la IA
       const response = await apiService.post('/v1/generate', {
         prompt: `Reflexiona sobre esta entrada de diario: "${newEntry}". Proporciona una perspectiva reflexiva y alentadora en español, máximo 150 palabras.`,
         mode: 'diario_vivo'
@@ -62,7 +60,6 @@ function DiarioVivo({ onLogout }) {
       console.error('Error al obtener reflexión de IA:', err);
       setError('Se guardó tu entrada, pero no se pudo generar una reflexión automática');
       
-      // Guardar entrada con reflexión por defecto
       const entry = {
         text: newEntry,
         reflection: getFallbackReflection(),
@@ -96,86 +93,122 @@ function DiarioVivo({ onLogout }) {
 
   return (
     <>
-      <TopNavigation onLogout={onLogout} /> {/* ✅ CAMBIAR: <topNavigation> por <TopNavigation> */}
-      <Container fluid className="py-4">
-        <div className="text-center mb-5">
+      <TopNavigation onLogout={onLogout} />
+      
+      <Container fluid className="py-3 px-2 px-md-4">
+        {/* Header - Optimizado para móvil */}
+        <div className="text-center mb-4 mb-md-5">
           <div className="diario-container">
-            <h1 className="gradient-title display-4 floating no-triple-select">
+            <h1 className="gradient-title floating no-triple-select" style={{
+              fontSize: 'clamp(2rem, 8vw, 3.5rem)',
+              marginBottom: '1rem'
+            }}>
               📖 Diario Vivo
             </h1>
-            <p className="text-light mb-4" style={{ 
-              fontSize: '1.1rem', 
+            <p className="text-light mb-3 mb-md-4" style={{ 
+              fontSize: 'clamp(0.9rem, 4vw, 1.1rem)', 
               fontWeight: '300',
-              textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)' 
+              textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)',
+              padding: '0 1rem'
             }}>
               Registra tus pensamientos y reflexiones diarias
             </p>
           </div>
         </div>
 
+        {/* Error message - Responsive */}
         {error && (
-          <div className="alert-modern mb-4 text-center" style={{ 
+          <div className="alert-modern mb-3 mb-md-4 text-center mx-2" style={{ 
             color: '#e74c3c',
             background: 'rgba(231, 76, 60, 0.1)',
             border: '1px solid rgba(231, 76, 60, 0.3)',
-            borderRadius: '8px',
-            padding: '12px 20px'
+            borderRadius: '12px',
+            padding: '12px 16px',
+            fontSize: 'clamp(0.85rem, 3vw, 1rem)'
           }}>
             {error}
           </div>
         )}
 
-        {/* Nueva entrada */}
-        <div className="modern-card mb-5 p-4">
-          <div className="text-center mb-4">
+        {/* Nueva entrada - Optimizada para móvil */}
+        <div className="modern-card mb-4 mb-md-5" style={{
+          margin: '0 8px',
+          padding: 'clamp(16px, 4vw, 24px)',
+          background: 'rgba(255, 255, 255, 0.1)',
+          backdropFilter: 'blur(15px)',
+          borderRadius: '20px',
+          border: '1px solid rgba(255, 255, 255, 0.2)'
+        }}>
+          <div className="text-center mb-3 mb-md-4">
             <h5 className="text-light" style={{ 
               fontWeight: '600', 
-              fontSize: '1.3rem',
-              textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)'
+              fontSize: 'clamp(1.1rem, 5vw, 1.3rem)',
+              textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)',
+              marginBottom: '0.5rem'
             }}>
               ✨ Nueva Entrada
             </h5>
-            <p className="text-light" style={{ 
+            <p className="text-light d-none d-sm-block" style={{ 
               opacity: 0.8,
-              textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)'
+              textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)',
+              fontSize: '0.95rem'
             }}>
               Expresa tus pensamientos libremente
             </p>
           </div>
           
           <form onSubmit={(e) => { e.preventDefault(); saveEntry(); }}>
-            <div className="mb-4">
+            <div className="mb-3 mb-md-4">
               <textarea
-                className="form-control-modern w-100"
-                rows={5}
+                className="form-control w-100"
+                rows={4}
                 value={newEntry}
                 onChange={(e) => setNewEntry(e.target.value)}
                 placeholder="¿Qué está pasando en tu mente y corazón hoy? Escribe sin filtros, este es tu espacio seguro..."
                 disabled={isLoading}
                 style={{ 
-                  fontSize: '1.1rem',
+                  fontSize: 'clamp(0.9rem, 4vw, 1.1rem)',
                   lineHeight: '1.6',
                   resize: 'vertical',
-                  minHeight: '120px'
+                  minHeight: 'clamp(100px, 20vw, 140px)',
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  borderRadius: '12px',
+                  color: 'white',
+                  padding: 'clamp(12px, 3vw, 16px)',
+                  backdropFilter: 'blur(10px)'
                 }}
               />
             </div>
             
             <div className="d-flex justify-content-end">
               <button 
-                className="btn-modern btn-success-modern"
+                className="btn btn-success"
                 type="submit" 
                 disabled={isLoading || !newEntry.trim()}
-                style={{ padding: '12px 24px' }}
+                style={{
+                  background: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+                  border: 'none',
+                  borderRadius: '25px',
+                  padding: 'clamp(8px 16px, 3vw, 12px 24px)',
+                  fontSize: 'clamp(0.85rem, 3.5vw, 1rem)',
+                  fontWeight: '600',
+                  transition: 'all 0.3s ease',
+                  opacity: isLoading || !newEntry.trim() ? 0.5 : 1
+                }}
               >
                 {isLoading ? (
                   <>
-                    <div className="modern-spinner me-2" style={{ width: '20px', height: '20px' }}></div>
-                    Guardando...
+                    <div className="spinner-border spinner-border-sm me-2" role="status">
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
+                    <span className="d-none d-sm-inline">Guardando...</span>
+                    <span className="d-inline d-sm-none">Guardando</span>
                   </>
                 ) : (
                   <>
-                    <span className="me-2">Guardar Entrada</span>
+                    <span className="me-2 d-none d-sm-inline">Guardar Entrada</span>
+                    <span className="d-inline d-sm-none">Guardar</span>
                     <span>💾</span>
                   </>
                 )}
@@ -184,13 +217,20 @@ function DiarioVivo({ onLogout }) {
           </form>
         </div>
 
-        {/* Entradas anteriores */}
-        <div className="modern-card p-4">
+        {/* Entradas anteriores - Optimizado para móvil */}
+        <div className="modern-card p-4" style={{
+          margin: '0 8px',
+          background: 'rgba(255, 255, 255, 0.1)',
+          backdropFilter: 'blur(15px)',
+          borderRadius: '20px',
+          border: '1px solid rgba(255, 255, 255, 0.2)'
+        }}>
           <div className="text-center mb-4">
             <h5 className="text-light" style={{ 
               fontWeight: '600', 
-              fontSize: '1.3rem',
-              textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)'
+              fontSize: 'clamp(1.1rem, 5vw, 1.3rem)',
+              textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)',
+              marginBottom: '0.5rem'
             }}>
               📚 Entradas Anteriores ({entries.length})
             </h5>
