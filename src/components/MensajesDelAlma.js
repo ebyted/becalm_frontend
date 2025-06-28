@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import API_CONFIG from '../config/api';
-import topNavigation from './topNavigation'; // ✅ CORREGIR AQUÍ
+import apiService from '../config/api'; // ✅ CAMBIAR: API_CONFIG por apiService
+import TopNavigation from './topNavigationopNavigation'; // ✅ CAMBIAR: topNavigation por TopNavigation
 import '../styles/FixOverlay.css';
 
 function MensajesDelAlma({ onLogout }) {
@@ -24,22 +24,19 @@ function MensajesDelAlma({ onLogout }) {
     setSelectedType(type);
     
     try {
-      const response = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.GENERATE}`, {
-        method: 'POST',
-        headers: API_CONFIG.getAuthHeaders(),
-        body: JSON.stringify({
-          prompt: `Genera un mensaje del alma sobre ${type}. Debe ser inspirador, profundo y reconfortante.`,
-          mode: 'mensajes_alma'
-        }),
+      // ✅ CAMBIAR: Usar apiService en lugar de fetch manual
+      const response = await apiService.post('/v1/generate', {
+        prompt: `Genera un mensaje del alma sobre ${type}. Debe ser inspirador, profundo y reconfortante.`,
+        mode: 'mensajes_alma'
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        setCurrentMessage(data.text);
+      if (response && response.text) {
+        setCurrentMessage(response.text);
       } else {
         throw new Error('Error al generar mensaje');
       }
     } catch (err) {
+      console.error('Error generating message:', err);
       // Fallback messages
       const fallbackMessages = {
         inspiracion: 'Tu alma conoce el camino. Confía en su sabiduría y permite que te guíe hacia la luz que ya llevas dentro. Cada paso que das es un acto de valentía y crecimiento.',
@@ -71,27 +68,53 @@ function MensajesDelAlma({ onLogout }) {
     }
   };
 
+  const deleteMessage = (messageId) => {
+    const updatedMessages = savedMessages.filter(msg => msg.id !== messageId);
+    setSavedMessages(updatedMessages);
+    localStorage.setItem('savedMessages', JSON.stringify(updatedMessages));
+  };
+
   useEffect(() => {
     // Load saved messages from localStorage
     const saved = localStorage.getItem('savedMessages');
     if (saved) {
-      setSavedMessages(JSON.parse(saved));
+      try {
+        setSavedMessages(JSON.parse(saved));
+      } catch (err) {
+        console.error('Error loading saved messages:', err);
+        setSavedMessages([]);
+      }
     }
   }, []);
 
   return (
     <>
-      <topNavigation onLogout={onLogout} />
-      <Container fluid>
+      {/* ✅ CAMBIAR: topNavigation por TopNavigation */}
+      <TopNavigation onLogout={onLogout} />
+      
+      <Container fluid className="py-4">
         <div className="text-center mb-5">
-          <h1 className="gradient-title display-4 floating">💌 Mensajes del Alma</h1>
-          <p className="text-light mb-4" style={{ fontSize: '1.1rem', fontWeight: '300' }}>
-            Recibe inspiración y sabiduría para tu camino
-          </p>
+          <div className="mensajes-container">
+            <h1 className="gradient-title display-4 floating no-triple-select">
+              💌 Mensajes del Alma
+            </h1>
+            <p className="text-light mb-4" style={{ 
+              fontSize: '1.1rem', 
+              fontWeight: '300',
+              textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)' 
+            }}>
+              Recibe inspiración y sabiduría para tu camino interior
+            </p>
+          </div>
         </div>
 
         {/* Tipos de mensajes */}
-        <div className="modern-card mb-5 p-4">
+        <div className="modern-card mb-5 p-4" style={{
+          background: 'rgba(255, 255, 255, 0.1)',
+          backdropFilter: 'blur(15px)',
+          borderRadius: '20px',
+          border: '1px solid rgba(255, 255, 255, 0.2)'
+        }}>
           <div className="text-center mb-4">
             <h5 className="text-light" style={{ fontWeight: '600', fontSize: '1.3rem' }}>
               🎭 Elige tu Inspiración
@@ -110,23 +133,29 @@ function MensajesDelAlma({ onLogout }) {
                   disabled={isLoading}
                   style={{
                     background: messageType.gradient,
-                    borderRadius: 'var(--border-radius)',
-                    transition: 'var(--transition)',
-                    cursor: 'pointer',
+                    borderRadius: '15px',
+                    transition: 'all 0.3s ease',
+                    cursor: isLoading ? 'not-allowed' : 'pointer',
                     color: 'white',
                     fontWeight: '600',
                     position: 'relative',
                     overflow: 'hidden',
                     animationDelay: `${index * 0.1}s`,
-                    animation: 'fadeInUp 0.5s ease-out both'
+                    animation: 'fadeInUp 0.5s ease-out both',
+                    boxShadow: '0 8px 25px rgba(0, 0, 0, 0.2)',
+                    opacity: isLoading ? 0.7 : 1
                   }}
                   onMouseEnter={(e) => {
-                    e.target.style.transform = 'translateY(-4px) scale(1.02)';
-                    e.target.style.boxShadow = 'var(--shadow-medium)';
+                    if (!isLoading) {
+                      e.target.style.transform = 'translateY(-4px) scale(1.02)';
+                      e.target.style.boxShadow = '0 12px 35px rgba(0, 0, 0, 0.3)';
+                    }
                   }}
                   onMouseLeave={(e) => {
-                    e.target.style.transform = 'translateY(0) scale(1)';
-                    e.target.style.boxShadow = 'var(--shadow-light)';
+                    if (!isLoading) {
+                      e.target.style.transform = 'translateY(0) scale(1)';
+                      e.target.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.2)';
+                    }
                   }}
                 >
                   <div style={{ fontSize: '2.5rem', marginBottom: '12px' }}>
@@ -143,10 +172,17 @@ function MensajesDelAlma({ onLogout }) {
 
         {/* Mensaje actual */}
         {(currentMessage || isLoading) && (
-          <div className="modern-card text-center p-5 mb-5">
+          <div className="modern-card text-center p-5 mb-5" style={{
+            background: 'rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(15px)',
+            borderRadius: '20px',
+            border: '1px solid rgba(255, 255, 255, 0.2)'
+          }}>
             {isLoading ? (
               <div>
-                <div className="modern-spinner mb-4" style={{ width: '60px', height: '60px', margin: '0 auto' }}></div>
+                <div className="spinner-border text-light mb-4" role="status" style={{ width: '3rem', height: '3rem' }}>
+                  <span className="visually-hidden">Cargando...</span>
+                </div>
                 <p className="text-light" style={{ fontSize: '1.2rem', opacity: 0.8 }}>
                   El alma está preparando tu mensaje...
                 </p>
@@ -162,7 +198,7 @@ function MensajesDelAlma({ onLogout }) {
                 <div className="mb-4" style={{
                   background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05))',
                   padding: '30px',
-                  borderRadius: 'var(--border-radius-large)',
+                  borderRadius: '15px',
                   border: '1px solid rgba(255, 255, 255, 0.2)',
                   position: 'relative'
                 }}>
@@ -179,27 +215,60 @@ function MensajesDelAlma({ onLogout }) {
                     fontSize: '1.3rem',
                     lineHeight: '1.6',
                     fontWeight: '300',
-                    fontStyle: 'italic'
+                    fontStyle: 'italic',
+                    textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)'
                   }}>
                     "{currentMessage}"
                   </p>
                 </div>
 
-                <div className="d-flex justify-content-center gap-3">
+                <div className="d-flex justify-content-center gap-3 flex-wrap">
                   <button 
-                    className="btn-modern btn-success-modern"
+                    className="btn btn-success"
                     onClick={saveMessage}
+                    style={{
+                      background: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+                      border: 'none',
+                      borderRadius: '25px',
+                      padding: '10px 20px',
+                      fontWeight: '600',
+                      transition: 'all 0.3s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.transform = 'scale(1.05)';
+                      e.target.style.boxShadow = '0 8px 25px rgba(67, 233, 123, 0.3)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.transform = 'scale(1)';
+                      e.target.style.boxShadow = 'none';
+                    }}
                   >
-                    <span className="me-2">Guardar Mensaje</span>
-                    <span>💾</span>
+                    <span className="me-2">💾</span>
+                    <span>Guardar Mensaje</span>
                   </button>
                   
                   <button 
-                    className="btn-modern"
+                    className="btn btn-primary"
                     onClick={() => generateMessage(selectedType)}
+                    style={{
+                      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                      border: 'none',
+                      borderRadius: '25px',
+                      padding: '10px 20px',
+                      fontWeight: '600',
+                      transition: 'all 0.3s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.transform = 'scale(1.05)';
+                      e.target.style.boxShadow = '0 8px 25px rgba(102, 126, 234, 0.3)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.transform = 'scale(1)';
+                      e.target.style.boxShadow = 'none';
+                    }}
                   >
-                    <span className="me-2">Nuevo Mensaje</span>
-                    <span>🔄</span>
+                    <span className="me-2">🔄</span>
+                    <span>Nuevo Mensaje</span>
                   </button>
                 </div>
               </div>
@@ -209,7 +278,12 @@ function MensajesDelAlma({ onLogout }) {
 
         {/* Mensajes guardados */}
         {savedMessages.length > 0 && (
-          <div className="modern-card p-4">
+          <div className="modern-card p-4" style={{
+            background: 'rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(15px)',
+            borderRadius: '20px',
+            border: '1px solid rgba(255, 255, 255, 0.2)'
+          }}>
             <div className="text-center mb-4">
               <h5 className="text-light" style={{ fontWeight: '600', fontSize: '1.3rem' }}>
                 💎 Mensajes Guardados
@@ -223,12 +297,24 @@ function MensajesDelAlma({ onLogout }) {
               {savedMessages.map((message, index) => (
                 <Col md={6} lg={4} key={message.id}>
                   <div 
-                    className="modern-card p-4 h-100"
+                    className="modern-card p-4 h-100 position-relative"
                     style={{ 
+                      background: 'rgba(255, 255, 255, 0.05)',
+                      backdropFilter: 'blur(10px)',
+                      borderRadius: '15px',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
                       animationDelay: `${index * 0.1}s`,
                       animation: 'fadeInUp 0.5s ease-out both'
                     }}
                   >
+                    <button
+                      onClick={() => deleteMessage(message.id)}
+                      className="btn-close btn-close-white position-absolute top-0 end-0 m-2"
+                      style={{ fontSize: '0.8rem', opacity: 0.6 }}
+                      onMouseEnter={(e) => e.target.style.opacity = '1'}
+                      onMouseLeave={(e) => e.target.style.opacity = '0.6'}
+                    />
+                    
                     <div className="text-center mb-3">
                       <span style={{ fontSize: '2rem' }}>{message.icon}</span>
                       <h6 className="text-light mt-2 mb-3" style={{ fontWeight: '600' }}>
@@ -245,7 +331,7 @@ function MensajesDelAlma({ onLogout }) {
                     </p>
                     
                     <div className="mt-auto">
-                      <span className="badge-modern" style={{ opacity: 0.7, fontSize: '0.8rem' }}>
+                      <span className="badge bg-secondary" style={{ opacity: 0.7, fontSize: '0.8rem' }}>
                         {new Date(message.timestamp).toLocaleDateString()}
                       </span>
                     </div>
@@ -255,6 +341,20 @@ function MensajesDelAlma({ onLogout }) {
             </Row>
           </div>
         )}
+
+        {/* CSS para animaciones */}
+        <style jsx>{`
+          @keyframes fadeInUp {
+            from {
+              opacity: 0;
+              transform: translateY(30px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+        `}</style>
       </Container>
     </>
   );
