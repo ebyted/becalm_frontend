@@ -1,53 +1,58 @@
-/* src/styles/Login.css */
+/* src/styles/Login.css - RESTAURANDO ESTILOS ORIGINALES */
 
-/* Variables CSS */
+/* Variables CSS con la paleta original */
 :root {
-  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --primary-gradient: linear-gradient(135deg, #a8e6cf 0%, #88c999 100%);
   --glass-bg: rgba(255, 255, 255, 0.1);
   --glass-border: rgba(255, 255, 255, 0.2);
-  --text-primary: #ffffff;
+  --text-primary: #2c3e50;
   --border-radius: 12px;
   --transition: all 0.3s ease;
+  --success-color: #88c999;
+  --success-hover: #7bb386;
 }
 
-/* Estilos para inputs */
+/* Estilos para inputs - PALETA ORIGINAL */
 .form-control-modern {
-  background-color: #1e1e1e !important;
-  color: #ffffff !important;
-  border: 2px solid #333333 !important;
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  color: #2c3e50 !important;
+  border: 2px solid rgba(136, 201, 153, 0.3) !important;
   border-radius: 8px !important;
   padding: 12px 16px !important;
   font-size: 16px !important;
   transition: all 0.3s ease !important;
   outline: none !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .form-control-modern::placeholder {
-  color: #999999 !important;
-  opacity: 1 !important;
+  color: #7f8c8d !important;
+  opacity: 0.8 !important;
 }
 
 .form-control-modern:focus {
-  border-color: #007bff !important;
-  background-color: #2a2a2a !important;
-  box-shadow: 0 0 10px rgba(0, 123, 255, 0.3) !important;
+  border-color: #88c999 !important;
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  box-shadow: 0 0 15px rgba(136, 201, 153, 0.3) !important;
   outline: none !important;
 }
 
 .form-control-modern:hover {
-  border-color: #555555 !important;
+  border-color: rgba(136, 201, 153, 0.5) !important;
+  background-color: rgba(255, 255, 255, 0.95) !important;
 }
 
 /* Específico para autofill de Chrome */
 .form-control-modern:-webkit-autofill,
 .form-control-modern:-webkit-autofill:hover,
 .form-control-modern:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0 1000px #1e1e1e inset !important;
-  -webkit-text-fill-color: #ffffff !important;
+  -webkit-box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.9) inset !important;
+  -webkit-text-fill-color: #2c3e50 !important;
   transition: background-color 5000s ease-in-out 0s !important;
 }
 
-/* Estilos para botones */
+/* Estilos para botones - PALETA ORIGINAL */
 .btn-modern {
   border: none;
   border-radius: 8px;
@@ -56,50 +61,53 @@
   letter-spacing: 0.5px;
   transition: all 0.3s ease;
   cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .btn-success-modern {
-  background: linear-gradient(135deg, #28a745, #20c997);
+  background: linear-gradient(135deg, #88c999, #a8e6cf);
   color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .btn-success-modern:hover {
-  background: linear-gradient(135deg, #218838, #1abc9c);
+  background: linear-gradient(135deg, #7bb386, #95d9b8);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
+  box-shadow: 0 8px 25px rgba(136, 201, 153, 0.4);
 }
 
 .btn-success-modern:disabled {
-  background: #6c757d;
+  background: #bdc3c7;
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
 }
 
-/* Estilos para el card moderno */
+/* Estilos para el card moderno - PALETA ORIGINAL */
 .modern-card {
   background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilos para alertas */
+/* Estilos para alertas - PALETA ORIGINAL */
 .alert-modern {
   padding: 12px 20px;
   border-radius: 8px;
   font-weight: 500;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Spinner moderno */
+/* Spinner moderno - PALETA ORIGINAL */
 .modern-spinner {
   border: 2px solid rgba(255, 255, 255, 0.3);
-  border-left: 2px solid #ffffff;
+  border-left: 2px solid #88c999;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -112,6 +120,8 @@
 /* Logo flotante */
 .floating {
   animation: floating 3s ease-in-out infinite;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 @keyframes floating {
@@ -119,21 +129,46 @@
   50% { transform: translateY(-10px); }
 }
 
-/* Estilos para tabs */
+/* Estilos para tabs - PALETA ORIGINAL */
 .nav-tabs-modern .nav-link {
   border: none;
   border-radius: 0;
+  transition: all 0.3s ease;
 }
 
 .nav-tabs-modern .nav-link.active {
-  border-bottom: 3px solid #007bff;
+  background: var(--primary-gradient) !important;
+  color: white !important;
 }
 
-/* Labels */
+.nav-tabs-modern .nav-link:not(.active) {
+  background: var(--glass-bg);
+  color: white;
+}
+
+.nav-tabs-modern .nav-link:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Labels - PALETA ORIGINAL */
 .form-label {
   margin-bottom: 8px;
   font-size: 14px;
   font-weight: 500;
+  color: white !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Textos - PALETA ORIGINAL */
+.text-light {
+  color: white !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Brand logo */
+.brand-logo {
+  color: white !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 /* Responsive */
@@ -147,4 +182,25 @@
     padding: 10px 16px !important;
     font-size: 14px;
   }
+  
+  .form-control-modern {
+    font-size: 14px !important;
+    padding: 10px 12px !important;
+  }
+}
+
+/* Efectos adicionales para mejorar la experiencia */
+.form-control-modern:focus {
+  animation: glow 0.3s ease-in-out;
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 5px rgba(136, 201, 153, 0.2); }
+  100% { box-shadow: 0 0 15px rgba(136, 201, 153, 0.3); }
+}
+
+/* Mejoras para el botón */
+.btn-success-modern:active {
+  transform: translateY(0px);
+  box-shadow: 0 4px 15px rgba(136, 201, 153, 0.3);
 }
