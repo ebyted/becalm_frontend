@@ -120,3 +120,18 @@ class ApiService {
 
 const apiService = new ApiService();
 export default apiService;
+
+// src/config/api.js - VERSIÓN MUY SIMPLE
+// const API_URL = 'http://168.231.67.221:8011';
+
+// const API_CONFIG = {
+//   BASE_URL: API_URL,
+//   HEADERS: {
+//     'Content-Type': 'application/json',
+//     'Accept': 'application/json',
+//   }
+// };
+
+// console.log('🔧 API Config simple cargado:', API_CONFIG.BASE_URL);
+
+// export default API_CONFIG;
