@@ -1,4 +1,4 @@
-// src/config/api.js - CORREGIR ENDPOINTS
+// src/config/api.js - ARCHIVO COMPLETO CORREGIDO
 const API_CONFIG = {
   // URLs de backend en orden de prioridad
   BACKEND_URLS: [
@@ -216,7 +216,7 @@ class ApiService {
     return this.request(endpoint, { method: 'DELETE' });
   }
 
-  // Métodos específicos de la API
+  // MÉTODO LOGIN CORREGIDO para usar /token con FormData
   async login(credentials) {
     const url = `${this.baseURL}${API_CONFIG.ENDPOINTS.LOGIN}`;
     console.log('📡 Login request a:', url);
@@ -288,9 +288,6 @@ class ApiService {
 // Crear instancia única
 const apiService = new ApiService();
 
-// Exportar tanto el servicio como la configuración de manera explícita
+// Exportar tanto el servicio como la configuración
 export { API_CONFIG };
 export default apiService;
-
-// También exportar endpoints directamente para facilitar el uso
-export const ENDPOINTS = API_CONFIG.ENDPOINTS;

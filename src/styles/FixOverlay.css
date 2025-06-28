@@ -1,0 +1,118 @@
+/* src/styles/FixOverlay.css */
+
+/* Solución para el problema del overlay que oculta colores */
+
+/* Resetear elementos problemáticos */
+.modal-backdrop,
+.overlay,
+.backdrop {
+    display: none !important;
+}
+
+/* Corregir z-index del título flotante */
+.gradient-title.floating {
+    position: relative !important;
+    z-index: 2 !important;
+    pointer-events: auto !important;
+    /* Asegurar que los colores se vean correctamente */
+    background: linear-gradient(135deg, #a8e6cf 0%, #88c999 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    text-shadow: none !important;
+}
+
+/* Corregir el contenedor principal */
+.main-content,
+.diario-container,
+.menu-container {
+    position: relative !important;
+    z-index: 1 !important;
+    background: transparent !important;
+}
+
+/* Elementos de fondo */
+.background-layer,
+.bg-gradient {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: -1 !important;
+    pointer-events: none !important;
+}
+
+/* Corregir elementos glass/blur que interfieren */
+.glass-bg,
+.blur-effect {
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    pointer-events: none !important;
+    z-index: 0 !important;
+}
+
+/* Elementos interactivos deben estar adelante */
+.btn,
+.button,
+.clickable {
+    position: relative !important;
+    z-index: 3 !important;
+    pointer-events: auto !important;
+}
+
+/* Específico para títulos con gradiente */
+h1.gradient-title,
+h2.gradient-title,
+h3.gradient-title {
+    /* Forzar visibilidad del gradiente */
+    background: linear-gradient(135deg, #a8e6cf 0%, #88c999 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    
+    /* Resetear propiedades que interfieren */
+    text-shadow: none !important;
+    color: transparent !important;
+    
+    /* Posicionamiento correcto */
+    position: relative !important;
+    z-index: 2 !important;
+    pointer-events: auto !important;
+}
+
+/* Prevenir selección accidental que causa el problema */
+.no-triple-select {
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+}
+
+/* Forzar colores correctos en hover */
+.gradient-title:hover {
+    background: linear-gradient(135deg, #95d9b8 0%, #7bb386 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+}
+
+/* Animación que no interfiera */
+.floating {
+    animation: floating 3s ease-in-out infinite !important;
+}
+
+@keyframes floating {
+    0%, 100% { 
+        transform: translateY(0px) !important; 
+    }
+    50% { 
+        transform: translateY(-10px) !important; 
+    }
+}
+
+/* Remover cualquier pseudo-elemento que interfiera */
+.gradient-title::before,
+.gradient-title::after {
+    display: none !important;
+}
