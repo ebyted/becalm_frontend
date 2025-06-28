@@ -1,0 +1,860 @@
+/* ====== ESTILO GLOBAL MODERNO ====== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Definir la fuente Rosemarie para los títulos principales */
+@font-face {
+  font-family: 'Rosemarie';
+  src: local('Rosemarie');
+  font-display: swap;
+}
+
+:root {
+  /* Paleta de colores verde olivo, café y blanco */
+  --olive-light: #9caf88;
+  --olive-medium: #7a8471;
+  --olive-dark: #5c6b5d;
+  --coffee-light: #d4b896;
+  --coffee-medium: #b8956a;
+  --coffee-dark: #8b7355;
+  --white-pure: #ffffff;
+  --white-soft: #f8f9fa;
+  --white-cream: #f5f4f0;
+  
+  /* Gradientes actualizados con nueva paleta */
+  --primary-gradient: linear-gradient(135deg, var(--olive-light) 0%, var(--olive-medium) 100%);
+  --secondary-gradient: linear-gradient(135deg, var(--coffee-light) 0%, var(--coffee-medium) 100%);
+  --success-gradient: linear-gradient(135deg, var(--olive-light) 0%, var(--olive-dark) 100%);
+  --calm-gradient: linear-gradient(135deg, var(--white-cream) 0%, var(--coffee-light) 100%);
+  
+  /* Efectos de cristal con nueva paleta */
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(156, 175, 136, 0.3);
+  --glass-bg-olive: rgba(156, 175, 136, 0.15);
+  --glass-bg-coffee: rgba(212, 184, 150, 0.15);
+  
+  /* Sombras actualizadas */
+  --shadow-light: 0 8px 32px rgba(92, 107, 93, 0.15);
+  --shadow-medium: 0 16px 64px rgba(92, 107, 93, 0.25);
+  --shadow-heavy: 0 24px 96px rgba(92, 107, 93, 0.35);
+  
+  /* Colores de texto */
+  --text-primary: var(--olive-dark);
+  --text-secondary: var(--coffee-dark);
+  --text-light: var(--white-pure);
+  
+  /* Otros */
+  --border-radius: 16px;
+  --border-radius-large: 24px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--white-cream) 0%, var(--olive-light) 30%, var(--coffee-light) 70%, var(--olive-medium) 100%);
+  background-size: 400% 400%;
+  animation: gradientShift 20s ease infinite;
+  position: relative;
+}
+
+.app-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('./assets/images/desert.jpg') no-repeat center center fixed;
+  background-size: cover;
+  opacity: 0.1;
+  z-index: -1;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.content-container {
+  flex: 1;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 1;
+}
+
+/* ====== COMPONENTES MODERNOS ====== */
+
+/* Glass Card Effect */
+.modern-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: var(--shadow-light);
+  transition: var(--transition);
+  overflow: hidden;
+  position: relative;
+}
+
+.modern-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--olive-light), transparent);
+}
+
+.modern-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-medium);
+  border-color: var(--olive-medium);
+  background: var(--glass-bg-olive);
+}
+
+/* Modern Buttons */
+.btn-modern {
+  background: var(--primary-gradient);
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 12px 24px;
+  font-weight: 500;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  color: var(--white-pure);
+  box-shadow: var(--shadow-light);
+}
+
+.btn-modern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: var(--transition);
+}
+
+.btn-modern:hover::before {
+  left: 100%;
+}
+
+.btn-modern:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+  background: linear-gradient(135deg, var(--olive-medium) 0%, var(--olive-dark) 100%);
+  color: var(--white-pure);
+}
+
+.btn-success-modern {
+  background: var(--success-gradient);
+}
+
+.btn-success-modern:hover {
+  background: linear-gradient(135deg, var(--olive-dark) 0%, var(--coffee-dark) 100%);
+}
+
+.btn-secondary-modern {
+  background: var(--secondary-gradient);
+}
+
+.btn-secondary-modern:hover {
+  background: linear-gradient(135deg, var(--coffee-medium) 0%, var(--coffee-dark) 100%);
+}
+
+/* Chat Bubbles Modernos */
+.chat-bubble {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 18px;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+  max-width: 75%;
+  position: relative;
+  animation: fadeInUp 0.3s ease-out;
+  box-shadow: var(--shadow-light);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chat-bubble-user {
+  background: var(--primary-gradient);
+  color: var(--white-pure);
+  margin-left: auto;
+  border-bottom-right-radius: 6px;
+}
+
+.chat-bubble-ai {
+  background: var(--glass-bg-coffee);
+  border: 1px solid var(--coffee-light);
+  color: var(--text-primary);
+  border-bottom-left-radius: 6px;
+}
+
+/* Form Controls Modernos */
+.form-control-modern {
+  background: var(--glass-bg);
+  border: 1px solid var(--olive-light);
+  border-radius: var(--border-radius);
+  padding: 12px 16px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: var(--transition);
+  color: var(--text-primary);
+}
+
+.form-control-modern:focus {
+  background: var(--white-cream);
+  border-color: var(--olive-medium);
+  box-shadow: 0 0 0 3px rgba(156, 175, 136, 0.2);
+  outline: none;
+}
+
+.form-control-modern::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+/* Loading Spinner Moderno */
+.modern-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--coffee-light);
+  border-top: 3px solid var(--olive-medium);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Alerts Modernos */
+.alert-modern {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 16px;
+  margin-bottom: 16px;
+  animation: slideInDown 0.3s ease-out;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Títulos con Gradiente */
+.gradient-title {
+  background: linear-gradient(135deg, var(--olive-medium) 0%, var(--coffee-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-family: 'Rosemarie', cursive, serif;
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 2rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.5px;
+}
+
+/* Mediation Card Effects */
+.meditation-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--olive-light);
+  border-radius: var(--border-radius-large);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: var(--transition);
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+
+.meditation-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--calm-gradient);
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.meditation-card:hover::before {
+  opacity: 0.15;
+}
+
+.meditation-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--shadow-heavy);
+  border-color: var(--coffee-medium);
+}
+
+/* Progress Bar Moderno */
+.progress-modern {
+  height: 8px;
+  background: var(--glass-bg);
+  border-radius: 4px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.progress-bar-modern {
+  background: var(--success-gradient);
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar-modern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Badge Moderno */
+.badge-modern {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-radius: 20px;
+  color: var(--white-pure);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  border: 1px solid var(--olive-light);
+}
+
+.badge-modern:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Botón de cristal mini para acciones pequeñas */
+.btn-glass-mini {
+  background: var(--glass-bg-olive);
+  border: 1px solid var(--olive-light);
+  border-radius: 50%;
+  color: var(--olive-dark);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-glass-mini:hover {
+  background: var(--coffee-light);
+  transform: scale(1.1);
+  color: var(--white-pure);
+  border-color: var(--coffee-medium);
+}
+
+.btn-glass-mini:active {
+  transform: scale(0.95);
+}
+
+/* Floating Elements */
+.floating {
+  animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* ====== EFECTOS ESPECIALES ADICIONALES ====== */
+
+/* Efectos de partículas flotantes */
+.app-container::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, rgba(156, 175, 136, 0.08), transparent),
+    radial-gradient(2px 2px at 40px 70px, rgba(212, 184, 150, 0.08), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(156, 175, 136, 0.06), transparent),
+    radial-gradient(1px 1px at 130px 80px, rgba(212, 184, 150, 0.06), transparent),
+    radial-gradient(2px 2px at 160px 30px, rgba(255, 255, 255, 0.05), transparent);
+  background-repeat: repeat;
+  background-size: 200px 100px;
+  animation: floatingParticles 25s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes floatingParticles {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-100px); }
+}
+
+/* Efecto de respiración para elementos importantes */
+.breathing {
+  animation: breathe 4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+/* Efecto de ondas en hover */
+.wave-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.wave-effect::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.wave-effect:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Texto con efecto de escritura */
+.typewriter {
+  overflow: hidden;
+  border-right: 2px solid rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: rgba(255, 255, 255, 0.7); }
+}
+
+/* Efecto de cristal mejorado */
+.glass-premium {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Gradientes animados para texto */
+.gradient-text-animated {
+  background: linear-gradient(
+    45deg,
+    var(--olive-light),
+    var(--olive-medium),
+    var(--coffee-light),
+    var(--coffee-medium),
+    var(--olive-dark),
+    var(--coffee-dark)
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientTextFlow 6s ease infinite;
+}
+
+@keyframes gradientTextFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Efectos de hover mejorados */
+.hover-lift {
+  transition: var(--transition);
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--shadow-heavy);
+}
+
+.hover-glow:hover {
+  box-shadow: 
+    0 0 20px rgba(156, 175, 136, 0.4),
+    0 0 40px rgba(156, 175, 136, 0.2),
+    0 0 60px rgba(156, 175, 136, 0.1);
+}
+
+/* Animaciones de entrada mejoradas */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Loading spinner mejorado */
+.spinner-premium {
+  width: 60px;
+  height: 60px;
+  border: 3px solid transparent;
+  border-top: 3px solid var(--olive-light);
+  border-right: 3px solid var(--olive-medium);
+  border-bottom: 3px solid var(--coffee-light);
+  border-left: 3px solid var(--coffee-medium);
+  border-radius: 50%;
+  animation: spinPremium 1s linear infinite;
+}
+
+@keyframes spinPremium {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Efectos de scroll suave */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selección de texto personalizada */
+::selection {
+  background: rgba(156, 175, 136, 0.3);
+  color: var(--white-pure);
+}
+
+::-moz-selection {
+  background: rgba(156, 175, 136, 0.3);
+  color: var(--white-pure);
+}
+
+/* Cursor personalizado */
+.custom-cursor {
+  cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="%23667eea"/></svg>'), auto;
+}
+
+/* Efecto de aurora boreal en el fondo */
+.aurora-effect {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(90deg, transparent, rgba(156, 175, 136, 0.03), transparent),
+    linear-gradient(0deg, transparent, rgba(212, 184, 150, 0.03), transparent);
+  animation: aurora 15s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes aurora {
+  0%, 100% { 
+    opacity: 0.3;
+    transform: translateX(-50px);
+  }
+  50% { 
+    opacity: 0.8;
+    transform: translateX(50px);
+  }
+}
+
+/* Efecto de ondas en el fondo */
+.wave-background {
+  position: relative;
+  overflow: hidden;
+}
+
+.wave-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(156, 175, 136, 0.05) 25%,
+    rgba(212, 184, 150, 0.05) 50%,
+    rgba(156, 175, 136, 0.05) 75%,
+    transparent 100%
+  );
+  animation: waveMove 8s ease-in-out infinite;
+}
+
+@keyframes waveMove {
+  0% { transform: translateX(-50%); }
+  50% { transform: translateX(-25%); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Responsive mejoras */
+@media (max-width: 768px) {
+  .floating {
+    animation-duration: 2s;
+  }
+  
+  .gradient-title {
+    font-size: 2.5rem !important;
+  }
+  
+  .modern-card {
+    margin: 0.5rem;
+  }
+  
+  .chat-bubble {
+    max-width: 95%;
+  }
+}
+
+/* Accesibilidad mejorada */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .floating, .breathing {
+    animation: none;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-primary: #e2e8f0;
+    --text-secondary: #a0aec0;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .modern-card {
+    border: 2px solid rgba(255, 255, 255, 0.5);
+  }
+  
+  .btn-modern {
+    border: 2px solid rgba(255, 255, 255, 0.3);
+  }
+}
+
+/* Clase especial para el logo BeCalm con fuente Rosemarie */
+.brand-logo {
+  font-family: 'Rosemarie', cursive, serif;
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: #ffffff;
+  text-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.8),
+    0 1px 2px rgba(0, 0, 0, 0.6),
+    0 0 10px rgba(156, 175, 136, 0.4);
+  letter-spacing: 0.8px;
+  animation: floating 3s ease-in-out infinite;
+  /* Mejorar nitidez del texto */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Variante más pequeña para contextos compactos */
+.brand-logo-small {
+  font-family: 'Rosemarie', cursive, serif;
+  font-size: 1.8rem;
+  font-weight: 400;
+  background: linear-gradient(135deg, var(--olive-light) 0%, var(--coffee-medium) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.4));
+  letter-spacing: 0.4px;
+}
+
+/* ====== LOGO BECALM FLOTANTE ====== */
+.becalm-logo-floating {
+  font-size: 2.5rem;
+  display: inline-block;
+  animation: logoFloat 4s ease-in-out infinite, logoGlow 3s ease-in-out infinite alternate;
+  position: relative;
+  filter: drop-shadow(0 4px 12px rgba(156, 175, 136, 0.6));
+  text-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.8),
+    0 0 20px rgba(156, 175, 136, 0.6),
+    0 0 30px rgba(156, 175, 136, 0.4);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.becalm-logo-floating:hover {
+  transform: scale(1.2) rotate(10deg);
+  filter: drop-shadow(0 6px 20px rgba(156, 175, 136, 0.8));
+  text-shadow: 
+    0 0 15px rgba(255, 255, 255, 1),
+    0 0 25px rgba(156, 175, 136, 0.8),
+    0 0 35px rgba(156, 175, 136, 0.6);
+}
+
+/* Animación de flotación suave */
+@keyframes logoFloat {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-8px) rotate(2deg);
+  }
+  50% { 
+    transform: translateY(-12px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-8px) rotate(-2deg);
+  }
+}
+
+/* Animación de brillo pulsante */
+@keyframes logoGlow {
+  0% {
+    text-shadow: 
+      0 0 10px rgba(255, 255, 255, 0.8),
+      0 0 20px rgba(156, 175, 136, 0.6),
+      0 0 30px rgba(156, 175, 136, 0.4);
+  }
+  100% {
+    text-shadow: 
+      0 0 20px rgba(255, 255, 255, 1),
+      0 0 30px rgba(156, 175, 136, 0.8),
+      0 0 40px rgba(156, 175, 136, 0.6),
+      0 0 50px rgba(156, 175, 136, 0.4);
+  }
+}
+
+/* Responsivo para móviles */
+@media (max-width: 768px) {
+  .becalm-logo-floating {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .becalm-logo-floating {
+    font-size: 1.8rem;
+  }
+}
