@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container } from 'react-bootstrap';
 import authService from '../services/authService';
-import API_CONFIG from '../config/api';
+import apiService, { API_CONFIG } from '../config/api';
 import ConnectionStatus from './ConnectionStatus';
 
 function Login({ onLogin }) {

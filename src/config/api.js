@@ -242,6 +242,9 @@ class ApiService {
 // Crear instancia única
 const apiService = new ApiService();
 
-// Exportar tanto el servicio como la configuración
+// Exportar tanto el servicio como la configuración de manera explícita
 export { API_CONFIG };
 export default apiService;
+
+// También exportar endpoints directamente para facilitar el uso
+export const ENDPOINTS = API_CONFIG.ENDPOINTS;
