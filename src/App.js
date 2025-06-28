@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
-import Menu from './components/Menu';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './components/Login';
-import DialogoSagrado from './components/DialogoSagrado';
+import Menu from './components/Menu';
 import DiarioVivo from './components/DiarioVivo';
 import MeditaConmigo from './components/MeditaConmigo';
 import MensajesDelAlma from './components/MensajesDelAlma';
@@ -65,19 +63,22 @@ function App() {
 
   return (
     <Router>
-      <div className="app-container">
-        <Menu onLogout={handleLogout} />
-        <div className="content-container">
-          <Routes>
-            <Route path="/" element={<DialogoSagrado />} />
-            <Route path="/diario-vivo" element={<DiarioVivo />} />
-            <Route path="/medita-conmigo" element={<MeditaConmigo />} />
-            <Route path="/mensajes-del-alma" element={<MensajesDelAlma />} />
-            <Route path="/ritual-diario" element={<RitualDiario />} />
-            <Route path="/mapa-interior" element={<MapaInterior />} />
-            <Route path="/silencio-sagrado" element={<SilencioSagrado />} />
-          </Routes>
-        </div>
+      <div className="App">
+        <Routes>
+          {/* Ruta principal - Menu */}
+          <Route path="/" element={<Menu onLogout={handleLogout} />} />
+          
+          {/* Rutas de componentes - PASAR onLogout */}
+          <Route path="/diario-vivo" element={<DiarioVivo onLogout={handleLogout} />} />
+          <Route path="/medita-conmigo" element={<MeditaConmigo onLogout={handleLogout} />} />
+          <Route path="/mensajes-del-alma" element={<MensajesDelAlma onLogout={handleLogout} />} />
+          <Route path="/ritual-diario" element={<RitualDiario onLogout={handleLogout} />} />
+          <Route path="/mapa-interior" element={<MapaInterior onLogout={handleLogout} />} />
+          <Route path="/silencio-sagrado" element={<SilencioSagrado onLogout={handleLogout} />} />
+          
+          {/* Redirect por defecto */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
       </div>
     </Router>
   );
