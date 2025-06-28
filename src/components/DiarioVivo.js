@@ -95,7 +95,7 @@ function DiarioVivo({ onLogout }) {
     <>
       <TopNavigation onLogout={onLogout} />
       
-      <Container fluid className="py-3 px-2 px-md-4">
+      <Container fluid className="py-3 px-1 px-sm-2 px-md-4">
         {/* Header - Optimizado para móvil */}
         <div className="text-center mb-4 mb-md-5">
           <div className="diario-container">
