@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import apiService from '../config/api'; // ✅ CAMBIAR: API_CONFIG por apiService
-import TopNavigation from './TopNavigation'; // ✅ CORRECTO
+import TopNav from './TopNav'; // ✅ CORRECTO
 import '../styles/FixOverlay.css';
 
 function MeditaConmigo({ onLogout }) {
@@ -253,8 +253,8 @@ Respira naturalmente y permite que cada exhalación te lleve más profundo hacia
 
   return (
     <>
-      {/* ✅ CAMBIAR: <topNavigation> por <TopNavigation> */}
-      <TopNavigation onLogout={onLogout} />
+      {/* ✅ CAMBIAR: <topNavigation> por <TopNav> */}
+      <TopNav onLogout={onLogout} />
       <Container fluid className="py-4">
         <div className="text-center mb-5">
           <div className="medita-container">

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import apiService from '../config/api'; // ✅ CAMBIAR: API_CONFIG por apiService
-import TopNavigation from './TopNavigation'; // ✅ CAMBIAR: topNavigation por TopNavigation
+import TopNav from './TopNav'; // ✅ CAMBIAR: topNavigation por TopNav
 import '../styles/FixOverlay.css';
 
 function MensajesDelAlma({ onLogout }) {
@@ -89,8 +89,8 @@ function MensajesDelAlma({ onLogout }) {
 
   return (
     <>
-      {/* ✅ CAMBIAR: topNavigation por TopNavigation */}
-      <TopNavigation onLogout={onLogout} />
+      {/* ✅ CAMBIAR: topNavigation por TopNav */}
+      <TopNav onLogout={onLogout} />
       
       <Container fluid className="py-4">
         <div className="text-center mb-5">
