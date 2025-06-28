@@ -1,36 +1,150 @@
 /* src/styles/Login.css */
+
+/* Variables CSS */
+:root {
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --text-primary: #ffffff;
+  --border-radius: 12px;
+  --transition: all 0.3s ease;
+}
+
+/* Estilos para inputs */
 .form-control-modern {
-  background-color: #2c3e50 !important;
+  background-color: #1e1e1e !important;
   color: #ffffff !important;
-  border: 1px solid #34495e !important;
+  border: 2px solid #333333 !important;
   border-radius: 8px !important;
   padding: 12px 16px !important;
   font-size: 16px !important;
-  outline: none !important;
   transition: all 0.3s ease !important;
-  width: 100% !important;
+  outline: none !important;
 }
 
 .form-control-modern::placeholder {
-  color: #bdc3c7 !important;
+  color: #999999 !important;
   opacity: 1 !important;
 }
 
 .form-control-modern:focus {
-  border-color: #3498db !important;
-  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1) !important;
-  background-color: #34495e !important;
+  border-color: #007bff !important;
+  background-color: #2a2a2a !important;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.3) !important;
+  outline: none !important;
 }
 
 .form-control-modern:hover {
-  border-color: #5d6d7e !important;
+  border-color: #555555 !important;
 }
 
-/* Específico para Chrome y navegadores webkit */
+/* Específico para autofill de Chrome */
 .form-control-modern:-webkit-autofill,
 .form-control-modern:-webkit-autofill:hover,
 .form-control-modern:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0 1000px #2c3e50 inset !important;
+  -webkit-box-shadow: 0 0 0 1000px #1e1e1e inset !important;
   -webkit-text-fill-color: #ffffff !important;
   transition: background-color 5000s ease-in-out 0s !important;
+}
+
+/* Estilos para botones */
+.btn-modern {
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-success-modern {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  color: white;
+}
+
+.btn-success-modern:hover {
+  background: linear-gradient(135deg, #218838, #1abc9c);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
+}
+
+.btn-success-modern:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Estilos para el card moderno */
+.modern-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilos para alertas */
+.alert-modern {
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Spinner moderno */
+.modern-spinner {
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-left: 2px solid #ffffff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Logo flotante */
+.floating {
+  animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Estilos para tabs */
+.nav-tabs-modern .nav-link {
+  border: none;
+  border-radius: 0;
+}
+
+.nav-tabs-modern .nav-link.active {
+  border-bottom: 3px solid #007bff;
+}
+
+/* Labels */
+.form-label {
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .modern-card {
+    margin: 15px;
+    padding: 20px !important;
+  }
+  
+  .nav-tabs-modern button {
+    padding: 10px 16px !important;
+    font-size: 14px;
+  }
 }
