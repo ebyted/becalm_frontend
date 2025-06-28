@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import API_CONFIG from '../config/api';
+import TopNavigation from './TopNavigation'; // ✅ CORREGIR AQUÍ
+import '../styles/FixOverlay.css';
 
-function MensajesDelAlma() {
+function MensajesDelAlma({ onLogout }) {
   const [currentMessage, setCurrentMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [savedMessages, setSavedMessages] = useState([]);
@@ -78,180 +80,183 @@ function MensajesDelAlma() {
   }, []);
 
   return (
-    <Container fluid>
-      <div className="text-center mb-5">
-        <h1 className="gradient-title display-4 floating">💌 Mensajes del Alma</h1>
-        <p className="text-light mb-4" style={{ fontSize: '1.1rem', fontWeight: '300' }}>
-          Recibe inspiración y sabiduría para tu camino
-        </p>
-      </div>
-
-      {/* Tipos de mensajes */}
-      <div className="modern-card mb-5 p-4">
-        <div className="text-center mb-4">
-          <h5 className="text-light" style={{ fontWeight: '600', fontSize: '1.3rem' }}>
-            🎭 Elige tu Inspiración
-          </h5>
-          <p className="text-light" style={{ opacity: 0.8 }}>
-            Selecciona el tipo de mensaje que tu alma necesita escuchar hoy
+    <>
+      <TopNavigation onLogout={onLogout} />
+      <Container fluid>
+        <div className="text-center mb-5">
+          <h1 className="gradient-title display-4 floating">💌 Mensajes del Alma</h1>
+          <p className="text-light mb-4" style={{ fontSize: '1.1rem', fontWeight: '300' }}>
+            Recibe inspiración y sabiduría para tu camino
           </p>
         </div>
 
-        <Row className="g-3">
-          {messageTypes.map((messageType, index) => (
-            <Col md={6} lg={4} key={messageType.type}>
-              <button
-                className="w-100 p-4 border-0"
-                onClick={() => generateMessage(messageType.type)}
-                disabled={isLoading}
-                style={{
-                  background: messageType.gradient,
-                  borderRadius: 'var(--border-radius)',
-                  transition: 'var(--transition)',
-                  cursor: 'pointer',
-                  color: 'white',
-                  fontWeight: '600',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  animationDelay: `${index * 0.1}s`,
-                  animation: 'fadeInUp 0.5s ease-out both'
-                }}
-                onMouseEnter={(e) => {
-                  e.target.style.transform = 'translateY(-4px) scale(1.02)';
-                  e.target.style.boxShadow = 'var(--shadow-medium)';
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.transform = 'translateY(0) scale(1)';
-                  e.target.style.boxShadow = 'var(--shadow-light)';
-                }}
-              >
-                <div style={{ fontSize: '2.5rem', marginBottom: '12px' }}>
-                  {messageType.icon}
-                </div>
-                <div style={{ fontSize: '1.1rem' }}>
-                  {messageType.label}
-                </div>
-              </button>
-            </Col>
-          ))}
-        </Row>
-      </div>
-
-      {/* Mensaje actual */}
-      {(currentMessage || isLoading) && (
-        <div className="modern-card text-center p-5 mb-5">
-          {isLoading ? (
-            <div>
-              <div className="modern-spinner mb-4" style={{ width: '60px', height: '60px', margin: '0 auto' }}></div>
-              <p className="text-light" style={{ fontSize: '1.2rem', opacity: 0.8 }}>
-                El alma está preparando tu mensaje...
-              </p>
-            </div>
-          ) : (
-            <div>
-              <div className="mb-4">
-                <span style={{ fontSize: '4rem' }}>
-                  {messageTypes.find(mt => mt.type === selectedType)?.icon || '💌'}
-                </span>
-              </div>
-              
-              <div className="mb-4" style={{
-                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05))',
-                padding: '30px',
-                borderRadius: 'var(--border-radius-large)',
-                border: '1px solid rgba(255, 255, 255, 0.2)',
-                position: 'relative'
-              }}>
-                <div style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  height: '1px',
-                  background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent)'
-                }}></div>
-                
-                <p className="text-light mb-0" style={{ 
-                  fontSize: '1.3rem',
-                  lineHeight: '1.6',
-                  fontWeight: '300',
-                  fontStyle: 'italic'
-                }}>
-                  "{currentMessage}"
-                </p>
-              </div>
-
-              <div className="d-flex justify-content-center gap-3">
-                <button 
-                  className="btn-modern btn-success-modern"
-                  onClick={saveMessage}
-                >
-                  <span className="me-2">Guardar Mensaje</span>
-                  <span>💾</span>
-                </button>
-                
-                <button 
-                  className="btn-modern"
-                  onClick={() => generateMessage(selectedType)}
-                >
-                  <span className="me-2">Nuevo Mensaje</span>
-                  <span>🔄</span>
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* Mensajes guardados */}
-      {savedMessages.length > 0 && (
-        <div className="modern-card p-4">
+        {/* Tipos de mensajes */}
+        <div className="modern-card mb-5 p-4">
           <div className="text-center mb-4">
             <h5 className="text-light" style={{ fontWeight: '600', fontSize: '1.3rem' }}>
-              💎 Mensajes Guardados
+              🎭 Elige tu Inspiración
             </h5>
             <p className="text-light" style={{ opacity: 0.8 }}>
-              Tus inspiraciones favoritas
+              Selecciona el tipo de mensaje que tu alma necesita escuchar hoy
             </p>
           </div>
 
-          <Row className="g-4">
-            {savedMessages.map((message, index) => (
-              <Col md={6} lg={4} key={message.id}>
-                <div 
-                  className="modern-card p-4 h-100"
-                  style={{ 
+          <Row className="g-3">
+            {messageTypes.map((messageType, index) => (
+              <Col md={6} lg={4} key={messageType.type}>
+                <button
+                  className="w-100 p-4 border-0"
+                  onClick={() => generateMessage(messageType.type)}
+                  disabled={isLoading}
+                  style={{
+                    background: messageType.gradient,
+                    borderRadius: 'var(--border-radius)',
+                    transition: 'var(--transition)',
+                    cursor: 'pointer',
+                    color: 'white',
+                    fontWeight: '600',
+                    position: 'relative',
+                    overflow: 'hidden',
                     animationDelay: `${index * 0.1}s`,
                     animation: 'fadeInUp 0.5s ease-out both'
                   }}
+                  onMouseEnter={(e) => {
+                    e.target.style.transform = 'translateY(-4px) scale(1.02)';
+                    e.target.style.boxShadow = 'var(--shadow-medium)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.transform = 'translateY(0) scale(1)';
+                    e.target.style.boxShadow = 'var(--shadow-light)';
+                  }}
                 >
-                  <div className="text-center mb-3">
-                    <span style={{ fontSize: '2rem' }}>{message.icon}</span>
-                    <h6 className="text-light mt-2 mb-3" style={{ fontWeight: '600' }}>
-                      {message.typeLabel}
-                    </h6>
+                  <div style={{ fontSize: '2.5rem', marginBottom: '12px' }}>
+                    {messageType.icon}
                   </div>
-                  
-                  <p className="text-light mb-3" style={{ 
-                    fontSize: '0.95rem',
-                    lineHeight: '1.5',
-                    opacity: 0.9
-                  }}>
-                    "{message.text}"
-                  </p>
-                  
-                  <div className="mt-auto">
-                    <span className="badge-modern" style={{ opacity: 0.7, fontSize: '0.8rem' }}>
-                      {new Date(message.timestamp).toLocaleDateString()}
-                    </span>
+                  <div style={{ fontSize: '1.1rem' }}>
+                    {messageType.label}
                   </div>
-                </div>
+                </button>
               </Col>
             ))}
           </Row>
         </div>
-      )}
-    </Container>
+
+        {/* Mensaje actual */}
+        {(currentMessage || isLoading) && (
+          <div className="modern-card text-center p-5 mb-5">
+            {isLoading ? (
+              <div>
+                <div className="modern-spinner mb-4" style={{ width: '60px', height: '60px', margin: '0 auto' }}></div>
+                <p className="text-light" style={{ fontSize: '1.2rem', opacity: 0.8 }}>
+                  El alma está preparando tu mensaje...
+                </p>
+              </div>
+            ) : (
+              <div>
+                <div className="mb-4">
+                  <span style={{ fontSize: '4rem' }}>
+                    {messageTypes.find(mt => mt.type === selectedType)?.icon || '💌'}
+                  </span>
+                </div>
+                
+                <div className="mb-4" style={{
+                  background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05))',
+                  padding: '30px',
+                  borderRadius: 'var(--border-radius-large)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  position: 'relative'
+                }}>
+                  <div style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: '1px',
+                    background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent)'
+                  }}></div>
+                  
+                  <p className="text-light mb-0" style={{ 
+                    fontSize: '1.3rem',
+                    lineHeight: '1.6',
+                    fontWeight: '300',
+                    fontStyle: 'italic'
+                  }}>
+                    "{currentMessage}"
+                  </p>
+                </div>
+
+                <div className="d-flex justify-content-center gap-3">
+                  <button 
+                    className="btn-modern btn-success-modern"
+                    onClick={saveMessage}
+                  >
+                    <span className="me-2">Guardar Mensaje</span>
+                    <span>💾</span>
+                  </button>
+                  
+                  <button 
+                    className="btn-modern"
+                    onClick={() => generateMessage(selectedType)}
+                  >
+                    <span className="me-2">Nuevo Mensaje</span>
+                    <span>🔄</span>
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Mensajes guardados */}
+        {savedMessages.length > 0 && (
+          <div className="modern-card p-4">
+            <div className="text-center mb-4">
+              <h5 className="text-light" style={{ fontWeight: '600', fontSize: '1.3rem' }}>
+                💎 Mensajes Guardados
+              </h5>
+              <p className="text-light" style={{ opacity: 0.8 }}>
+                Tus inspiraciones favoritas
+              </p>
+            </div>
+
+            <Row className="g-4">
+              {savedMessages.map((message, index) => (
+                <Col md={6} lg={4} key={message.id}>
+                  <div 
+                    className="modern-card p-4 h-100"
+                    style={{ 
+                      animationDelay: `${index * 0.1}s`,
+                      animation: 'fadeInUp 0.5s ease-out both'
+                    }}
+                  >
+                    <div className="text-center mb-3">
+                      <span style={{ fontSize: '2rem' }}>{message.icon}</span>
+                      <h6 className="text-light mt-2 mb-3" style={{ fontWeight: '600' }}>
+                        {message.typeLabel}
+                      </h6>
+                    </div>
+                    
+                    <p className="text-light mb-3" style={{ 
+                      fontSize: '0.95rem',
+                      lineHeight: '1.5',
+                      opacity: 0.9
+                    }}>
+                      "{message.text}"
+                    </p>
+                    
+                    <div className="mt-auto">
+                      <span className="badge-modern" style={{ opacity: 0.7, fontSize: '0.8rem' }}>
+                        {new Date(message.timestamp).toLocaleDateString()}
+                      </span>
+                    </div>
+                  </div>
+                </Col>
+              ))}
+            </Row>
+          </div>
+        )}
+      </Container>
+    </>
   );
 }
 

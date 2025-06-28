@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import API_CONFIG from '../config/api';
-import TopNavigation from 'TopNavigation';
+import TopNavigation from './topNavigation';
 import '../styles/FixOverlay.css';
 
 function MeditaConmigo({ onLogout }) {
