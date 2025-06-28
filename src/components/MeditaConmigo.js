@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import API_CONFIG from '../config/api';
-import topNavigation from './topNavigation';
+import apiService from '../config/api'; // ✅ CAMBIAR: API_CONFIG por apiService
+import TopNavigation from './TTopNavigation'; // ✅ CAMBIAR: topNavigation por TopNavigation
 import '../styles/FixOverlay.css';
 
 function MeditaConmigo({ onLogout }) {
@@ -9,7 +9,7 @@ function MeditaConmigo({ onLogout }) {
   const [isActive, setIsActive] = useState(false);
   const [timer, setTimer] = useState(0);
   const [guidance, setGuidance] = useState('');
-  const [backgroundMusic, setBackgroundMusic] = useState('silencio'); // 'silencio' o 'musica'
+  const [backgroundMusic, setBackgroundMusic] = useState('silencio');
   const [currentTrack, setCurrentTrack] = useState(null);
   const [audioElement, setAudioElement] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -24,70 +24,65 @@ function MeditaConmigo({ onLogout }) {
 
   const startMeditation = async (meditation) => {
     setCurrentSession(meditation);
-    setTimer(meditation.duration * 60); // Convert to seconds
+    setTimer(meditation.duration * 60);
     setIsActive(true);
 
     try {
-      // Get guided meditation text
-      const response = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.GENERATE}`, {
-        method: 'POST',
-        headers: API_CONFIG.getAuthHeaders(),
-        body: JSON.stringify({
-          prompt: `Crea una guía de meditación para ${meditation.name} de ${meditation.duration} minutos. ${meditation.description}`,
-          mode: 'meditacion'
-        }),
+      // ✅ CAMBIAR: Usar apiService
+      const response = await apiService.post('/v1/generate', {
+        prompt: `Crea una guía de meditación para ${meditation.name} de ${meditation.duration} minutos. ${meditation.description}`,
+        mode: 'meditacion'
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        setGuidance(data.text);
+      if (response && response.text) {
+        setGuidance(response.text);
+      } else {
+        setDefaultGuidance(meditation);
       }
 
-      // If music is selected, get background music
       if (backgroundMusic === 'musica') {
         await getBackgroundMusic();
       }
     } catch (err) {
-      setGuidance(`Bienvenido a tu sesión de ${meditation.name}. Encuentra una posición cómoda, cierra los ojos suavemente y permite que tu mente se relaje. ${meditation.description}.`);
+      console.error('Error getting meditation guidance:', err);
+      setDefaultGuidance(meditation);
       
-      // Even if API fails, try to provide synthetic sounds if music is selected
       if (backgroundMusic === 'musica') {
         generateFallbackMusic();
       }
     }
   };
 
+  const setDefaultGuidance = (meditation) => {
+    setGuidance(`Bienvenido a tu sesión de ${meditation.name}. 
+
+Encuentra una posición cómoda, ya sea sentado o acostado. Cierra los ojos suavemente y permite que tu mente se relaje. 
+
+${meditation.description}
+
+Respira naturalmente y permite que cada exhalación te lleve más profundo hacia un estado de calma y serenidad.`);
+  };
+
   const stopMeditation = () => {
     setIsActive(false);
     setTimer(0);
-    
-    // Stop any audio
     stopAudio();
   };
 
   const getBackgroundMusic = async () => {
     try {
-      const response = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.MEDITATION_MUSIC}`, {
-        method: 'POST',
-        headers: API_CONFIG.getAuthHeaders(),
-        body: JSON.stringify({
-          meditation_type: currentSession?.name || 'relajacion',
-          duration: currentSession?.duration || 10,
-          style: 'ambient'
-        }),
+      const response = await apiService.post('/audio/meditation', {
+        meditation_type: currentSession?.name || 'relajacion',
+        duration: currentSession?.duration || 10,
+        style: 'ambient'
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        if (data.tracks && data.tracks.length > 0) {
-          const track = data.tracks[0];
-          setCurrentTrack(track.name || 'Música de Meditación');
-          
-          if (track.url) {
-            playAudioTrack(track.url);
-          } else {
-            generateFallbackMusic();
-          }
+      if (response && response.tracks && response.tracks.length > 0) {
+        const track = response.tracks[0];
+        setCurrentTrack(track.name || 'Música de Meditación');
+        
+        if (track.url) {
+          playAudioTrack(track.url);
         } else {
           generateFallbackMusic();
         }
@@ -101,9 +96,8 @@ function MeditaConmigo({ onLogout }) {
   };
 
   const generateFallbackMusic = () => {
-    setCurrentTrack('Sonidos Relajantes Sintéticos');
+    setCurrentTrack('Sonidos Relajantes');
     try {
-      // Verificar si el usuario prefiere silencio
       const prefersSilence = localStorage.getItem('prefer_silence') === 'true';
       if (prefersSilence) {
         setCurrentTrack('Modo Silencioso');
@@ -112,7 +106,6 @@ function MeditaConmigo({ onLogout }) {
         return;
       }
       
-      // Usar Web Audio API para generar sonidos relajantes sintéticos
       generateRelaxingSounds();
     } catch (err) {
       console.error('Error al configurar audio:', err);
@@ -125,34 +118,28 @@ function MeditaConmigo({ onLogout }) {
     try {
       const audioContext = new (window.AudioContext || window.webkitAudioContext)();
       
-      // Crear un sonido simple y relajante sin modulación compleja
       const oscillator = audioContext.createOscillator();
       const gainNode = audioContext.createGain();
       const filterNode = audioContext.createBiquadFilter();
       
-      // Configurar filtro suave
       filterNode.type = 'lowpass';
       filterNode.frequency.setValueAtTime(400, audioContext.currentTime);
       filterNode.Q.setValueAtTime(1, audioContext.currentTime);
       
-      // Conectar la cadena de audio
       oscillator.connect(filterNode);
       filterNode.connect(gainNode);
       gainNode.connect(audioContext.destination);
       
-      // Usar una frecuencia simple y relajante (Do medio)
-      oscillator.frequency.setValueAtTime(261.63, audioContext.currentTime); // C4
+      oscillator.frequency.setValueAtTime(261.63, audioContext.currentTime);
       oscillator.type = 'sine';
       
-      // Volumen muy bajo para evitar molestias
       gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-      gainNode.gain.linearRampToValueAtTime(0.05, audioContext.currentTime + 2); // Fade in suave
+      gainNode.gain.linearRampToValueAtTime(0.05, audioContext.currentTime + 2);
       
-      // Añadir una modulación muy sutil para hacer el sonido más orgánico
       const lfo = audioContext.createOscillator();
       const lfoGain = audioContext.createGain();
-      lfo.frequency.setValueAtTime(0.1, audioContext.currentTime); // Modulación muy lenta
-      lfoGain.gain.setValueAtTime(2, audioContext.currentTime); // Modulación muy sutil
+      lfo.frequency.setValueAtTime(0.1, audioContext.currentTime);
+      lfoGain.gain.setValueAtTime(2, audioContext.currentTime);
       
       lfo.connect(lfoGain);
       lfoGain.connect(oscillator.frequency);
@@ -189,7 +176,6 @@ function MeditaConmigo({ onLogout }) {
         console.error('Error loading audio:', e);
         setAudioError('Error al cargar la música');
         setIsPlaying(false);
-        // Fallback to synthetic sounds
         generateFallbackMusic();
       });
       
@@ -215,14 +201,12 @@ function MeditaConmigo({ onLogout }) {
           audioElement.audio.currentTime = 0;
           audioElement.audio.src = '';
         } else if (audioElement.oscillators) {
-          // Fade out antes de detener para evitar ruidos abruptos
           audioElement.gainNodes?.forEach(gainNode => {
             try {
               gainNode.gain.linearRampToValueAtTime(0, audioElement.context.currentTime + 0.5);
             } catch (e) {}
           });
           
-          // Detener osciladores después del fade out
           setTimeout(() => {
             audioElement.oscillators?.forEach(osc => {
               try {
@@ -232,7 +216,6 @@ function MeditaConmigo({ onLogout }) {
           }, 600);
         }
         
-        // Cerrar contexto de audio después de un delay
         if (audioElement.context && audioElement.context.state !== 'closed') {
           setTimeout(() => {
             try {
@@ -257,10 +240,10 @@ function MeditaConmigo({ onLogout }) {
       }, 1000);
     } else if (timer === 0 && isActive) {
       setIsActive(false);
-      setGuidance(guidance + '\n\nTu sesión de meditación ha terminado. Toma un momento para agradecer este tiempo que te has dedicado.');
+      setGuidance(prev => prev + '\n\n✨ Tu sesión de meditación ha terminado. Toma un momento para agradecer este tiempo que te has dedicado. Respira profundo y vuelve suavemente al presente.');
     }
     return () => clearInterval(interval);
-  }, [isActive, timer, guidance]);
+  }, [isActive, timer]);
 
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
@@ -270,7 +253,8 @@ function MeditaConmigo({ onLogout }) {
 
   return (
     <>
-      <topNavigation onLogout={onLogout} />
+      {/* ✅ CAMBIAR: <topNavigation> por <TopNavigation> */}
+      <TopNavigation onLogout={onLogout} />
       <Container fluid className="py-4">
         <div className="text-center mb-5">
           <div className="medita-container">

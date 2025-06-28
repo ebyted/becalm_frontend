@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import apiService from '../config/api';
-import topNavigation from './topNavigation'; // ✅ CORREGIR AQUÍ
+import topNavigation from './TTopNavigation'; // ✅ CORREGIR AQUÍ
 import '../styles/FixOverlay.css';
 
 function DiarioVivo({ onLogout }) {

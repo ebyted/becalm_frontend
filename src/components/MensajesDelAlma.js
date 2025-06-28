@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import apiService from '../config/api'; // ✅ CAMBIAR: API_CONFIG por apiService
-import TopNavigation from './topNavigation'; // ✅ CAMBIAR: topNavigation por TopNavigation
+import TopNavigation from './TTopNavigation'; // ✅ CAMBIAR: topNavigation por TopNavigation
 import '../styles/FixOverlay.css';
 
 function MensajesDelAlma({ onLogout }) {
