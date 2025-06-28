@@ -1,11 +1,11 @@
-// src/components/TopNavigation.js - ARCHIVO COMPLETO
+// src/components/topNavigation.js - ARCHIVO COMPLETO
 import React from 'react';
 import { Container, Navbar, Nav, Button, Dropdown } from 'react-bootstrap';
 import { useNavigate, useLocation } from 'react-router-dom';
 import authService from '../services/authService';
 import '../styles/FixOverlay.css';
 
-function TopNavigation({ onLogout }) {
+function topNavigation({ onLogout }) {
   const navigate = useNavigate();
   const location = useLocation();
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import API_CONFIG from '../config/api';
-import TopNavigation from 'TopNavigation'; // ✅ AGREGAR IMPORT
+import topNavigation from 'topNavigation'; // ✅ AGREGAR IMPORT
 import '../styles/FixOverlay.css';
 
 function RitualDiario({ onLogout }) { // ✅ RECIBIR onLogout prop
@@ -107,7 +107,7 @@ function RitualDiario({ onLogout }) { // ✅ RECIBIR onLogout prop
   return (
     <>
       {/* ✅ AGREGAR NAVEGACIÓN SUPERIOR */}
-      <TopNavigation onLogout={onLogout} />
+      <topNavigation onLogout={onLogout} />
       
       <Container fluid className="py-4">
         <div className="text-center mb-5">

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import API_CONFIG from '../config/api';
-import TopNavigation from './topNavigation'; // ✅ CORREGIR AQUÍ
+import topNavigation from './topNavigation'; // ✅ CORREGIR AQUÍ
 import '../styles/FixOverlay.css';
 
 function MensajesDelAlma({ onLogout }) {
@@ -81,7 +81,7 @@ function MensajesDelAlma({ onLogout }) {
 
   return (
     <>
-      <TopNavigation onLogout={onLogout} />
+      <topNavigation onLogout={onLogout} />
       <Container fluid>
         <div className="text-center mb-5">
           <h1 className="gradient-title display-4 floating">💌 Mensajes del Alma</h1>

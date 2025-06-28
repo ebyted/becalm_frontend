@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import API_CONFIG from '../config/api';
-import TopNavigation from './topNavigation';
+import topNavigation from './topNavigation';
 import '../styles/FixOverlay.css';
 
 function MeditaConmigo({ onLogout }) {
@@ -270,7 +270,7 @@ function MeditaConmigo({ onLogout }) {
 
   return (
     <>
-      <TopNavigation onLogout={onLogout} />
+      <topNavigation onLogout={onLogout} />
       <Container fluid className="py-4">
         <div className="text-center mb-5">
           <div className="medita-container">
