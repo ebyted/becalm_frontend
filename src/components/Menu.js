@@ -3,8 +3,13 @@ import { NavLink } from 'react-router-dom';
 import authService from '../services/authService';
 import './Menu.css';
 import icons from '../assets/images/icons';
+import { Container, Row, Col } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import '../styles/FixOverlay.css';
 
 function Menu({ onLogout }) {
+  const navigate = useNavigate();
+
   const menuItems = [
     { name: 'Diálogo Conmigo', path: '/', icon: icons.dialogo, emoji: '🕊️' },
     { name: 'Diario Vivo', path: '/diario-vivo', icon: icons.diario, emoji: '📖' },
@@ -21,14 +26,22 @@ function Menu({ onLogout }) {
   };
 
   return (
-    <aside className="menu-container d-flex flex-column">
-      <div className="menu-content d-flex flex-column h-100">
-        {/* Brand Section */}
-        <div className="brand-section">
-          <h2 className="brand-title">BeCalm</h2>
-          <p className="brand-subtitle">Tu santuario digital</p>
+    <Container fluid className="py-4">
+      <div className="text-center mb-5">
+        <div className="menu-container">
+          <h1 className="gradient-title display-4 floating no-triple-select">
+            🌟 BeCalm Menu
+          </h1>
+          <p className="text-light mb-4" style={{ 
+            fontSize: '1.1rem', 
+            fontWeight: '300',
+            textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)' 
+          }}>
+            Elige tu camino hacia la paz interior
+          </p>
         </div>
-
+      </div>
+      <div className="menu-content d-flex flex-column h-100">
         {/* Menu Items */}
         <div className="flex-grow-1">
           {menuItems.map((item, index) => (
@@ -67,7 +80,7 @@ function Menu({ onLogout }) {
           </button>
         </div>
       </div>
-    </aside>
+    </Container>
   );
 }
 

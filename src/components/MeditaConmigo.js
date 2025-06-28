@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import API_CONFIG from '../config/api';
+import '../styles/FixOverlay.css';
 
 function MeditaConmigo() {
   const [currentSession, setCurrentSession] = useState(null);
@@ -267,12 +268,20 @@ function MeditaConmigo() {
   };
 
   return (
-    <Container fluid>
+    <Container fluid className="py-4">
       <div className="text-center mb-5">
-        <h1 className="gradient-title display-4 floating">🧘‍♀️ Medita Conmigo</h1>
-        <p className="text-light mb-4" style={{ fontSize: '1.1rem', fontWeight: '300' }}>
-          Encuentra tu paz interior con sesiones guiadas
-        </p>
+        <div className="medita-container">
+          <h1 className="gradient-title display-4 floating no-triple-select">
+            🧘‍♀️ Medita Conmigo
+          </h1>
+          <p className="text-light mb-4" style={{ 
+            fontSize: '1.1rem', 
+            fontWeight: '300',
+            textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)' 
+          }}>
+            Encuentra paz interior a través de la meditación
+          </p>
+        </div>
       </div>
 
       {!currentSession ? (

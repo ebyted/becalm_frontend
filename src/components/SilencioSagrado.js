@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import apiService from '../config/api';
+import '../styles/FixOverlay.css';
 
 function SilencioSagrado() {
   const [isActive, setIsActive] = useState(false);
@@ -54,12 +56,20 @@ function SilencioSagrado() {
   };
 
   return (
-    <Container fluid>
+    <Container fluid className="py-4">
       <div className="text-center mb-5">
-        <h1 className="gradient-title display-4 floating">🤫 Silencio Sagrado</h1>
-        <p className="text-light mb-4" style={{ fontSize: '1.1rem', fontWeight: '300' }}>
-          Encuentra paz en el espacio entre pensamientos
-        </p>
+        <div className="silencio-container">
+          <h1 className="gradient-title display-4 floating no-triple-select">
+            🤫 Silencio Sagrado
+          </h1>
+          <p className="text-light mb-4" style={{ 
+            fontSize: '1.1rem', 
+            fontWeight: '300',
+            textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)' 
+          }}>
+            Encuentra la paz en el silencio interior
+          </p>
+        </div>
       </div>
 
       {phase === 'preparation' && (
