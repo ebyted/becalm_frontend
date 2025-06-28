@@ -28,13 +28,20 @@ function Login({ onLogin }) {
     setError('');
 
     try {
-      await authService.login(formData.username, formData.password);
+      // Usar el método del servicio directamente
+      const response = await apiService.login({
+        username: formData.username,
+        password: formData.password
+      });
+      
+      console.log('✅ Login exitoso:', response);
       setSuccess('¡Bienvenido a BeCalm!');
       setTimeout(() => {
         onLogin();
       }, 1000);
-    } catch (err) {
-      setError(err.message);
+    } catch (error) {
+      console.error('❌ Error en login:', error);
+      setError(error.message);
     } finally {
       setLoading(false);
     }
