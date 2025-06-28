@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import apiService from '../config/api';
-import TopNav from './TopNav';
+import SmartNavigation from './SmartNavigation'; // ✅ NUEVO COMPONENTE INTELIGENTE
 import '../styles/FixOverlay.css';
 
 function DiarioVivo({ onLogout }) {
@@ -93,8 +93,7 @@ function DiarioVivo({ onLogout }) {
 
   return (
     <>
-      <TopNav onLogout={onLogout} />
-      
+      <SmartNavigation onLogout={onLogout} /> {/* ✅ NAVEGACIÓN INTELIGENTE */}
       <Container fluid className="py-3 px-1 px-sm-2 px-md-4">
         {/* Header - Optimizado para móvil */}
         <div className="text-center mb-4 mb-md-5">
