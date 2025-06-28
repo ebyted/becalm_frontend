@@ -203,12 +203,12 @@ function DiarioVivo({ onLogout }) {
                       <span className="visually-hidden">Loading...</span>
                     </div>
                     <span className="d-none d-sm-inline">Guardando...</span>
-                    <span className="d-inline d-sm-none">Guardando</span>
+                    <span className="d-sm-none">...</span>
                   </>
                 ) : (
                   <>
-                    <span className="me-2 d-none d-sm-inline">Guardar Entrada</span>
-                    <span className="d-inline d-sm-none">Guardar</span>
+                    <span className="d-none d-sm-inline me-2">Guardar Entrada</span>
+                    <span className="d-sm-none me-1">Guardar</span>
                     <span>💾</span>
                   </>
                 )}
@@ -217,32 +217,35 @@ function DiarioVivo({ onLogout }) {
           </form>
         </div>
 
-        {/* Entradas anteriores - Optimizado para móvil */}
-        <div className="modern-card p-4" style={{
+        {/* Entradas anteriores - Optimizadas para móvil */}
+        <div className="modern-card" style={{
           margin: '0 8px',
+          padding: 'clamp(16px, 4vw, 24px)',
           background: 'rgba(255, 255, 255, 0.1)',
           backdropFilter: 'blur(15px)',
           borderRadius: '20px',
           border: '1px solid rgba(255, 255, 255, 0.2)'
         }}>
-          <div className="text-center mb-4">
+          <div className="text-center mb-3 mb-md-4">
             <h5 className="text-light" style={{ 
               fontWeight: '600', 
               fontSize: 'clamp(1.1rem, 5vw, 1.3rem)',
-              textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)',
-              marginBottom: '0.5rem'
+              textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)'
             }}>
               📚 Entradas Anteriores ({entries.length})
             </h5>
           </div>
           
           {entries.length === 0 ? (
-            <div className="text-center py-5">
-              <div className="floating mb-4" style={{ fontSize: '4rem' }}>📝</div>
+            <div className="text-center py-4 py-md-5">
+              <div className="floating mb-3 mb-md-4" style={{ 
+                fontSize: 'clamp(2.5rem, 12vw, 4rem)' 
+              }}>📝</div>
               <p className="text-light" style={{ 
-                fontSize: '1.1rem', 
+                fontSize: 'clamp(0.9rem, 4vw, 1.1rem)', 
                 opacity: 0.8,
-                textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)'
+                textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)',
+                padding: '0 1rem'
               }}>
                 Aún no tienes entradas. ¡Comienza escribiendo tu primera reflexión!
               </p>
@@ -252,85 +255,94 @@ function DiarioVivo({ onLogout }) {
               {entries.map((entry, index) => (
                 <div 
                   key={entry.id} 
-                  className="modern-card mb-4 p-4"
+                  className="modern-card mb-3 mb-md-4"
                   style={{ 
                     animationDelay: `${index * 0.1}s`,
                     animation: 'fadeInUp 0.5s ease-out both',
-                    position: 'relative'
+                    position: 'relative',
+                    padding: 'clamp(12px, 3vw, 20px)',
+                    background: 'rgba(0, 0, 0, 0.2)',
+                    backdropFilter: 'blur(10px)',
+                    borderRadius: '15px',
+                    border: '1px solid rgba(255, 255, 255, 0.1)'
                   }}
                 >
-                  {/* Botón eliminar */}
+                  {/* Botón eliminar - Responsive */}
                   <button
                     onClick={() => deleteEntry(entry.id)}
                     style={{
                       position: 'absolute',
-                      top: '10px',
-                      right: '10px',
+                      top: 'clamp(8px, 2vw, 12px)',
+                      right: 'clamp(8px, 2vw, 12px)',
                       background: 'rgba(231, 76, 60, 0.2)',
                       border: '1px solid rgba(231, 76, 60, 0.4)',
                       borderRadius: '50%',
-                      width: '30px',
-                      height: '30px',
+                      width: 'clamp(28px, 6vw, 32px)',
+                      height: 'clamp(28px, 6vw, 32px)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       cursor: 'pointer',
                       transition: 'all 0.3s ease',
-                      fontSize: '14px'
+                      fontSize: 'clamp(12px, 3vw, 14px)',
+                      color: '#ff6b6b'
                     }}
                     title="Eliminar entrada"
-                    onMouseEnter={(e) => {
-                      e.target.style.background = 'rgba(231, 76, 60, 0.3)';
-                      e.target.style.transform = 'scale(1.1)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.target.style.background = 'rgba(231, 76, 60, 0.2)';
-                      e.target.style.transform = 'scale(1)';
-                    }}
                   >
                     🗑️
                   </button>
 
-                  {/* Tu reflexión */}
-                  <div className="mb-4" style={{ paddingRight: '40px' }}>
-                    <div className="d-flex align-items-center mb-3">
-                      <span style={{ fontSize: '1.5rem', marginRight: '8px' }}>📝</span>
+                  {/* Tu reflexión - Optimizada */}
+                  <div className="mb-3 mb-md-4" style={{ 
+                    paddingRight: 'clamp(32px, 8vw, 50px)' 
+                  }}>
+                    <div className="d-flex align-items-center mb-2 mb-md-3">
+                      <span style={{ 
+                        fontSize: 'clamp(1.2rem, 4vw, 1.5rem)', 
+                        marginRight: '8px' 
+                      }}>📝</span>
                       <h6 className="text-light mb-0" style={{ 
                         fontWeight: '600',
-                        textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)'
+                        textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)',
+                        fontSize: 'clamp(0.9rem, 3.5vw, 1.1rem)'
                       }}>
                         Tu Reflexión
                       </h6>
                     </div>
                     <p className="text-light" style={{ 
                       lineHeight: '1.6',
-                      fontSize: '1.05rem',
+                      fontSize: 'clamp(0.85rem, 3.5vw, 1.05rem)',
                       marginBottom: '0',
-                      padding: '16px',
+                      padding: 'clamp(12px, 3vw, 16px)',
                       background: 'rgba(255, 255, 255, 0.05)',
-                      borderRadius: 'var(--border-radius)',
+                      borderRadius: '12px',
                       border: '1px solid rgba(255, 255, 255, 0.1)',
-                      whiteSpace: 'pre-wrap'
+                      whiteSpace: 'pre-wrap',
+                      wordBreak: 'break-word'
                     }}>
                       {entry.text}
                     </p>
                   </div>
 
-                  {/* Perspectiva AI */}
-                  <div className="mb-3">
-                    <div className="d-flex align-items-center mb-3">
-                      <span style={{ fontSize: '1.5rem', marginRight: '8px' }}>🤔</span>
+                  {/* Perspectiva AI - Optimizada */}
+                  <div className="mb-2 mb-md-3">
+                    <div className="d-flex align-items-center mb-2 mb-md-3">
+                      <span style={{ 
+                        fontSize: 'clamp(1.2rem, 4vw, 1.5rem)', 
+                        marginRight: '8px' 
+                      }}>🤔</span>
                       <h6 className="text-light mb-0" style={{ 
                         fontWeight: '600',
-                        textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)'
+                        textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)',
+                        fontSize: 'clamp(0.9rem, 3.5vw, 1.1rem)'
                       }}>
                         Perspectiva y Reflexión
                       </h6>
                     </div>
                     <div style={{
                       background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1))',
-                      padding: '20px',
-                      borderRadius: 'var(--border-radius)',
+                      padding: 'clamp(12px, 3vw, 20px)',
+                      borderRadius: '12px',
                       border: '1px solid rgba(102, 126, 234, 0.2)',
                       position: 'relative'
                     }}>
@@ -344,23 +356,27 @@ function DiarioVivo({ onLogout }) {
                       }}></div>
                       <p className="text-light mb-0" style={{ 
                         lineHeight: '1.6',
-                        fontSize: '1.05rem'
+                        fontSize: 'clamp(0.85rem, 3.5vw, 1.05rem)',
+                        wordBreak: 'break-word'
                       }}>
                         {entry.reflection}
                       </p>
                     </div>
                   </div>
 
-                  {/* Timestamp */}
+                  {/* Timestamp - Responsive */}
                   <div className="d-flex justify-content-end">
-                    <span className="badge-modern" style={{ 
+                    <span style={{ 
                       opacity: 0.7,
                       background: 'rgba(255, 255, 255, 0.1)',
-                      padding: '4px 12px',
+                      padding: 'clamp(3px 8px, 2vw, 4px 12px)',
                       borderRadius: '20px',
-                      fontSize: '0.85rem'
+                      fontSize: 'clamp(0.7rem, 2.5vw, 0.85rem)',
+                      color: 'white',
+                      border: '1px solid rgba(255, 255, 255, 0.1)'
                     }}>
-                      📅 {entry.timestamp.toLocaleDateString()} • ⏰ {entry.timestamp.toLocaleTimeString()}
+                      <span className="d-none d-sm-inline">📅 {entry.timestamp.toLocaleDateString()} • ⏰ {entry.timestamp.toLocaleTimeString()}</span>
+                      <span className="d-sm-none">📅 {entry.timestamp.toLocaleDateString()}</span>
                     </span>
                   </div>
                 </div>
@@ -369,7 +385,7 @@ function DiarioVivo({ onLogout }) {
           )}
         </div>
 
-        {/* CSS para animaciones */}
+        {/* CSS para animaciones y estilos móvil */}
         <style jsx>{`
           @keyframes fadeInUp {
             from {
@@ -379,6 +395,55 @@ function DiarioVivo({ onLogout }) {
             to {
               opacity: 1;
               transform: translateY(0);
+            }
+          }
+
+          .floating {
+            animation: floating 3s ease-in-out infinite;
+          }
+
+          @keyframes floating {
+            0%, 100% { 
+              transform: translateY(0px); 
+            }
+            50% { 
+              transform: translateY(-5px); 
+            }
+          }
+
+          .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+          }
+
+          .form-control:focus {
+            background: rgba(255, 255, 255, 0.15) !important;
+            border-color: rgba(67, 233, 123, 0.5) !important;
+            box-shadow: 0 0 0 0.2rem rgba(67, 233, 123, 0.25) !important;
+            color: white !important;
+            outline: none !important;
+          }
+
+          /* Optimizaciones específicas para móvil */
+          @media (max-width: 576px) {
+            .container-fluid {
+              padding-left: 8px !important;
+              padding-right: 8px !important;
+            }
+            
+            .modern-card {
+              margin-left: 0 !important;
+              margin-right: 0 !important;
+            }
+            
+            .btn {
+              min-width: 80px;
+            }
+          }
+
+          /* Mejorar legibilidad en pantallas pequeñas */
+          @media (max-width: 768px) {
+            .text-light {
+              text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) !important;
             }
           }
         `}</style>
