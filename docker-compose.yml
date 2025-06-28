@@ -5,10 +5,12 @@ services:
       dockerfile: Dockerfile
     container_name: becalm-frontend-container
     ports:
-      - "80:80"
+      - "8013:80"
     environment:
       - NODE_ENV=production
-      - REACT_APP_API_URL=${REACT_APP_API_URL:-http://localhost:5000}
+      - REACT_APP_API_URL=http://168.231.67.221:8011
+      - REACT_APP_NAME=BeCalm
+      - REACT_APP_VERSION=1.0.0
     restart: unless-stopped
     networks:
       - becalm-network
