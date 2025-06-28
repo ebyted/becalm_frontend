@@ -3,6 +3,7 @@ import { Container } from 'react-bootstrap';
 import authService from '../services/authService';
 import apiService, { API_CONFIG } from '../config/api';
 import ConnectionStatus from './ConnectionStatus';
+import '../styles/Login.css';
 
 function Login({ onLogin }) {
   const [activeTab, setActiveTab] = useState('login');
