@@ -38,8 +38,8 @@
   --shadow-heavy: 0 24px 96px rgba(92, 107, 93, 0.35);
   
   /* Colores de texto */
-  --text-primary: var(--olive-dark);
-  --text-secondary: var(--coffee-dark);
+  --text-primary: var(--white-pure);
+  --text-secondary: var(--white-soft);
   --text-light: var(--white-pure);
   
   /* Otros */
@@ -58,6 +58,22 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  color: var(--white-pure);
+}
+
+/* Asegurar que todos los encabezados sean blancos por defecto */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--white-pure);
+}
+
+/* Asegurar que párrafos y spans sean blancos por defecto */
+p, span, div, label {
+  color: var(--white-pure);
+}
+
+/* Clase específica para texto blanco */
+.text-white {
+  color: var(--white-pure) !important;
 }
 
 .app-container {
@@ -95,6 +111,7 @@ body {
   -webkit-backdrop-filter: blur(10px);
   position: relative;
   z-index: 1;
+  color: var(--white-pure);
 }
 
 /* ====== COMPONENTES MODERNOS ====== */
@@ -283,7 +300,8 @@ body {
 
 /* Títulos con Gradiente */
 .gradient-title {
-  background: linear-gradient(135deg, var(--olive-medium) 0%, var(--coffee-dark) 100%);
+  color: var(--white-pure); /* Fallback para navegadores que no soporten gradientes en texto */
+  background: linear-gradient(135deg, var(--white-pure) 0%, var(--white-soft) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -291,7 +309,7 @@ body {
   font-weight: 400;
   text-align: center;
   margin-bottom: 2rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   letter-spacing: 0.5px;
 }
 
@@ -521,14 +539,15 @@ body {
 
 /* Gradientes animados para texto */
 .gradient-text-animated {
+  color: var(--white-pure); /* Fallback */
   background: linear-gradient(
     45deg,
-    var(--olive-light),
-    var(--olive-medium),
-    var(--coffee-light),
-    var(--coffee-medium),
-    var(--olive-dark),
-    var(--coffee-dark)
+    var(--white-pure),
+    var(--white-soft),
+    var(--white-cream),
+    var(--white-pure),
+    var(--white-soft),
+    var(--white-cream)
   );
   background-size: 300% 300%;
   -webkit-background-clip: text;
@@ -781,7 +800,8 @@ html {
   font-family: 'Rosemarie', cursive, serif;
   font-size: 1.8rem;
   font-weight: 400;
-  background: linear-gradient(135deg, var(--olive-light) 0%, var(--coffee-medium) 100%);
+  color: var(--white-pure); /* Fallback */
+  background: linear-gradient(135deg, var(--white-pure) 0%, var(--white-soft) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -857,4 +877,81 @@ html {
   .becalm-logo-floating {
     font-size: 1.8rem;
   }
+}
+
+/* ====== SOBRESCRIBIR ESTILOS DE BOOTSTRAP ====== */
+/* Estilos con alta especificidad para sobrescribir Bootstrap */
+.app-container h1,
+.app-container h2,
+.app-container h3,
+.app-container h4,
+.app-container h5,
+.app-container h6 {
+  color: var(--white-pure) !important;
+}
+
+.app-container p,
+.app-container span,
+.app-container div,
+.app-container label,
+.app-container li,
+.app-container td,
+.app-container th {
+  color: var(--white-pure) !important;
+}
+
+/* Sobrescribir estilos específicos de Bootstrap */
+.container h1,
+.container h2,
+.container h3,
+.container h4,
+.container h5,
+.container h6,
+.row h1,
+.row h2,
+.row h3,
+.row h4,
+.row h5,
+.row h6,
+.col h1,
+.col h2,
+.col h3,
+.col h4,
+.col h5,
+.col h6 {
+  color: var(--white-pure) !important;
+}
+
+/* Clases de Bootstrap comunes */
+.text-primary,
+.text-secondary,
+.text-success,
+.text-danger,
+.text-warning,
+.text-info,
+.text-light,
+.text-dark,
+.text-muted {
+  color: var(--white-pure) !important;
+}
+
+/* Display classes de Bootstrap */
+.display-1,
+.display-2,
+.display-3,
+.display-4,
+.display-5,
+.display-6 {
+  color: var(--white-pure) !important;
+}
+
+/* Asegurar que todos los elementos tengan color blanco */
+* {
+  color: inherit;
+}
+
+/* Clase específica para elementos que necesitan ser blancos */
+.force-white-text,
+.force-white-text * {
+  color: var(--white-pure) !important;
 }

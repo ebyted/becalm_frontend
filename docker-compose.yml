@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  becalm-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: becalm-frontend-container
+    ports:
+      - "80:80"
+    environment:
+      - NODE_ENV=production
+      - REACT_APP_API_URL=${REACT_APP_API_URL:-http://localhost:5000}
+    restart: unless-stopped
+    networks:
+      - becalm-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  becalm-network:
+    driver: bridge
