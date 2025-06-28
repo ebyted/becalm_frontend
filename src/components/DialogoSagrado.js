@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Container, Card, Form, Button, Alert, Spinner } from 'react-bootstrap';
 import API_CONFIG from '../config/api';
-import '../styles/FixOverlay.css';
 
 function DialogoSagrado() {
   const [messages, setMessages] = useState([]);
@@ -96,18 +95,20 @@ function DialogoSagrado() {
   };
 
   return (
-    <Container fluid className="py-4">
-      <div className="text-center mb-5">
-        <div className="dialogo-container">
-          <h1 className="gradient-title display-4 floating no-triple-select">
-            🕊️ Diálogo Sagrado
-          </h1>
-          <p className="text-light mb-4" style={{ 
+    <Container fluid className="h-100 d-flex flex-column">
+      <div className="text-center mb-4">
+        <h1 className="gradient-title display-4 floating">🕊️ Diálogo Conmigo</h1>
+        <div className="d-flex align-items-center justify-content-center mb-3">
+          <div className="becalm-logo-floating me-3">
+            🕊️
+          </div>
+          <p className="text-light mb-0" style={{ 
             fontSize: '1.1rem', 
             fontWeight: '300',
-            textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)' 
+            color: '#ffffff',
+            textShadow: '0 2px 4px rgba(0, 0, 0, 0.7)'
           }}>
-            Conversación profunda con tu sabiduría interior
+            Un espacio seguro para la reflexión y el crecimiento personal
           </p>
         </div>
       </div>

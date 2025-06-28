@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import API_CONFIG from '../config/api';
-import '../styles/FixOverlay.css';
 
 function MensajesDelAlma() {
   const [currentMessage, setCurrentMessage] = useState('');
@@ -79,20 +78,12 @@ function MensajesDelAlma() {
   }, []);
 
   return (
-    <Container fluid className="py-4">
+    <Container fluid>
       <div className="text-center mb-5">
-        <div className="mensajes-container">
-          <h1 className="gradient-title display-4 floating no-triple-select">
-            💌 Mensajes del Alma
-          </h1>
-          <p className="text-light mb-4" style={{ 
-            fontSize: '1.1rem', 
-            fontWeight: '300',
-            textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)' 
-          }}>
-            Recibe mensajes inspiradores para tu corazón
-          </p>
-        </div>
+        <h1 className="gradient-title display-4 floating">💌 Mensajes del Alma</h1>
+        <p className="text-light mb-4" style={{ fontSize: '1.1rem', fontWeight: '300' }}>
+          Recibe inspiración y sabiduría para tu camino
+        </p>
       </div>
 
       {/* Tipos de mensajes */}

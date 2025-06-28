@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import API_CONFIG from '../config/api';
-import '../styles/FixOverlay.css';
 
 function MapaInterior() {
   const [selectedArea, setSelectedArea] = useState(null);
@@ -89,20 +88,12 @@ function MapaInterior() {
   };
 
   return (
-    <Container fluid className="py-4">
+    <Container fluid>
       <div className="text-center mb-5">
-        <div className="mapa-container">
-          <h1 className="gradient-title display-4 floating no-triple-select">
-            🗺️ Mapa Interior
-          </h1>
-          <p className="text-light mb-4" style={{ 
-            fontSize: '1.1rem', 
-            fontWeight: '300',
-            textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)' 
-          }}>
-            Explora tu mundo interior y emocional
-          </p>
-        </div>
+        <h1 className="gradient-title display-4 floating">🗺️ Mapa Interior</h1>
+        <p className="text-light mb-4" style={{ fontSize: '1.1rem', fontWeight: '300' }}>
+          Explora las diferentes dimensiones de tu mundo emocional
+        </p>
       </div>
 
       {!selectedArea ? (
