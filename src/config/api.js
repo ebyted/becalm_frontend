@@ -1,4 +1,4 @@
-// src/config/api.js - ARCHIVO CORREGIDO
+// src/config/api.js - CORREGIR ENDPOINTS
 const API_CONFIG = {
   // URLs de backend en orden de prioridad
   BACKEND_URLS: [
@@ -20,12 +20,14 @@ const API_CONFIG = {
     'Accept': 'application/json',
   },
   
-  // Endpoints
+  // ENDPOINTS CORREGIDOS SEGÚN TU API
   ENDPOINTS: {
     HEALTH: '/health',
-    LOGIN: '/auth/login',
-    DIALOGO_MESSAGE: '/dialogo/message',
-    DIALOGO_HISTORY: '/dialogo/history',
+    LOGIN: '/token',                    // ✅ CAMBIO: era /auth/login, ahora /token
+    REGISTER: '/register',              // ✅ AGREGAR: endpoint de registro
+    DIALOGO_MESSAGE: '/dialogo_conmigo/message',  // ✅ CAMBIO: ruta correcta
+    DIALOGO_HISTORY: '/dialogo_conmigo/history',  // ✅ CAMBIO: ruta correcta
+    GENERATE: '/v1/generate',           // ✅ AGREGAR: endpoint de generación
   },
   
   // Función para obtener headers con auth
@@ -216,15 +218,59 @@ class ApiService {
 
   // Métodos específicos de la API
   async login(credentials) {
-    return this.post(API_CONFIG.ENDPOINTS.LOGIN, credentials);
+    const url = `${this.baseURL}${API_CONFIG.ENDPOINTS.LOGIN}`;
+    console.log('📡 Login request a:', url);
+    
+    // FastAPI OAuth2PasswordRequestForm espera form data, no JSON
+    const formData = new FormData();
+    formData.append('username', credentials.username);
+    formData.append('password', credentials.password);
+    
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          // NO incluir Content-Type para FormData
+          'Accept': 'application/json',
+        },
+        body: formData  // Usar FormData en lugar de JSON
+      });
+      
+      console.log('📥 Login response status:', response.status);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      
+      const data = await response.json();
+      console.log('✅ Login exitoso');
+      
+      // Guardar token
+      if (data.access_token) {
+        localStorage.setItem('access_token', data.access_token);
+      }
+      
+      return data;
+      
+    } catch (error) {
+      console.error('❌ Login falló:', error);
+      throw error;
+    }
+  }
+
+  async register(userData) {
+    return this.post(API_CONFIG.ENDPOINTS.REGISTER, userData);
   }
 
   async sendMessage(message) {
-    return this.post(API_CONFIG.ENDPOINTS.DIALOGO_MESSAGE, { message });
+    return this.post(API_CONFIG.ENDPOINTS.DIALOGO_MESSAGE, { 
+      prompt: message,
+      mode: 'text' 
+    });
   }
 
-  async getHistory() {
-    return this.get(API_CONFIG.ENDPOINTS.DIALOGO_HISTORY);
+  async getHistory(days = 2) {
+    return this.get(`${API_CONFIG.ENDPOINTS.DIALOGO_HISTORY}?days=${days}`);
   }
 
   async healthCheck() {
