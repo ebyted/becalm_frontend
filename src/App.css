@@ -451,11 +451,10 @@ body {
   transition: box-shadow 0.3s, background 0.3s;
 }
 .navbar:hover {
-  box-shadow: 0 16px 40px 0 rgba(74,77,52,0.18), 0 2px 12px 0 rgba(123,128,87,0.14);
   background: rgba(123,128,87,0.92);
 }
 .navbar a {
-  color: #FFFFEF;
+  color: #4A4D34;
   text-decoration: none;
   font-weight: 700;
   font-size: 1.08em;
@@ -469,7 +468,7 @@ body {
   opacity: 0.96;
 }
 .navbar a.active, .navbar a:focus, .navbar a:hover {
-  background: rgba(74,77,52,0.92);
+  background: #7B8057;
   color: #FFD700;
   border: 1.2px solid #FFD70044;
   box-shadow: 0 2px 12px #4A4D3422;
