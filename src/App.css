@@ -1,0 +1,976 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Montserrat+Alternates:wght@400;500;600;700&display=swap');
+
+html, body, * {
+  font-family: 'Montserrat Alternates', 'Montserrat', sans-serif !important;
+}
+/* Login Screen Styles */
+
+/* Login Screen Styles (compact) */
+.login.glass-card {
+  max-width: 340px;
+  margin: 2.2em auto 1.2em auto;
+  padding: 1.3em 1em 1em 1em;
+  border-radius: 14px;
+  box-shadow: 0 6px 24px #4A4D3422;
+  background: rgba(255,255,239,0.88);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.login h1 {
+  font-size: 1.45em;
+  color: #4A4D34;
+  margin-bottom: 0.2em;
+  font-family: 'Montserrat Alternates', 'Montserrat', sans-serif;
+  font-weight: 700;
+}
+.login p {
+  color: #7B8057;
+  font-size: 0.98em;
+  margin-bottom: 1.2em;
+  text-align: center;
+}
+.login button {
+  width: 100%;
+  margin-bottom: 0.7em;
+  padding: 0.6em 0;
+  font-size: 1em;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(90deg, #7B8057 60%, #4A4D34 100%);
+  color: #FFFFEF;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 2px 8px #4A4D3422;
+  transition: background 0.2s, color 0.2s;
+}
+.login button:hover {
+  background: linear-gradient(90deg, #4A4D34 60%, #7B8057 100%);
+  color: #FFD700;
+}
+.guest-msg {
+  color: #4A4D34;
+  font-size: 0.95em;
+  margin-top: 0.4em;
+  background: #FFFFEF;
+  border-radius: 7px;
+  padding: 0.4em 0.8em;
+  box-shadow: 0 1px 4px #4A4D3422;
+}
+@media (max-width: 600px) {
+  .login.glass-card {
+    max-width: 98vw;
+    margin: 1.2em auto 0.7em auto;
+    padding: 0.7em 0.3em 0.7em 0.3em;
+  }
+  .login h1 {
+    font-size: 1.1em;
+  }
+  .login p {
+    font-size: 0.92em;
+  }
+}
+
+/* Navbar compact styles */
+.navbar.glass-card {
+  max-width: 98vw;
+  margin: 1em auto 1em auto;
+  padding: 0.5em 0.5em;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px #4A4D3422;
+  display: flex;
+  gap: 0.5em;
+  justify-content: center;
+}
+.navbar a {
+  font-size: 1em;
+  padding: 0.5em 1.1em;
+  border-radius: 8px;
+  background: #7B8057;
+  color: #FFFFEF;
+  text-decoration: none;
+  font-family: 'Montserrat Alternates', 'Montserrat', sans-serif;
+  font-weight: 600;
+  transition: background 0.2s, color 0.2s;
+}
+.navbar a.active, .navbar a:focus, .navbar a:hover {
+  background: #4A4D34;
+  color: #FFD700;
+}
+
+/* Main content compact */
+.main-content {
+  max-width: 98vw;
+  margin: 0 auto;
+  padding: 0.5em 0.2em;
+}
+
+/* Onboarding compact */
+.glass-card {
+  max-width: 370px;
+  margin: 1.2em auto;
+  padding: 1.2em 1em;
+  border-radius: 14px;
+}
+.onboarding-form input,
+.onboarding-form select {
+  font-size: 1em;
+  padding: 0.35em 0.7em;
+  border-radius: 8px;
+  margin-bottom: 0.5em;
+  box-sizing: border-box;
+  height: 2.2em;
+  max-width: 320px;
+  width: 100%;
+}
+.onboarding-form input[type="text"],
+.onboarding-form input[type="email"],
+.onboarding-form input[type="tel"] {
+  max-length: 32;
+}
+.onboarding-form textarea {
+  font-size: 1em;
+  padding: 0.35em 0.7em;
+  border-radius: 8px;
+  margin-bottom: 0.5em;
+  box-sizing: border-box;
+  min-height: 36px;
+  max-width: 320px;
+  width: 100%;
+  resize: vertical;
+}
+.onboarding-form textarea {
+  font-size: 0.89em;
+  padding: 0.12em 0.4em;
+  border-radius: 7px;
+  margin-bottom: 0.28em;
+  box-sizing: border-box;
+  min-height: 28px;
+}
+.onboarding-form select {
+  height: 2em;
+  font-size: 0.89em;
+}
+.onboarding-form textarea {
+  min-height: 32px;
+  font-size: 0.89em;
+  padding: 0.22em 0.5em;
+}
+.onboarding-form select {
+  height: 2.2em;
+}
+.onboarding-form textarea {
+  min-height: 40px;
+  font-size: 0.95em;
+  padding: 0.38em 0.7em;
+}
+.onboarding-form button[type="button"],
+.onboarding-form button[type="submit"] {
+  font-size: 0.97em;
+  padding: 0.5em 1.1em;
+  border-radius: 8px;
+}
+.onboarding-form button {
+  font-size: 1em;
+  padding: 0.6em 1.2em;
+}
+.onboarding-tabs button {
+  font-size: 0.98em;
+  padding: 0.5em 1em;
+}
+/* Onboarding Tabs Styles */
+.onboarding-tabs {
+  display: flex;
+  gap: 1em;
+  margin-bottom: 1em;
+  justify-content: center;
+}
+.onboarding-tabs button {
+  background: #7B8057;
+  color: #FFFFEF;
+  border: none;
+  border-radius: 10px 10px 0 0;
+  padding: 0.45em 0.9em;
+  font-size: 0.95em;
+  font-family: 'Montserrat Alternates', 'Montserrat', sans-serif;
+  font-weight: 600;
+  box-shadow: 0 2px 8px #4A4D3422;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  opacity: 0.7;
+}
+.onboarding-tabs button.active-tab {
+  background: #4A4D34;
+  color: #FFD700;
+  opacity: 1;
+  box-shadow: 0 4px 12px #4A4D3444;
+  border-bottom: 2px solid #FFD700;
+}
+.onboarding-tabs button:focus {
+  outline: 2px solid #FFD700;
+}
+
+/* Onboarding Styles */
+.onboarding-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8em;
+  margin-top: 1em;
+}
+.onboarding-form input,
+.onboarding-form select,
+.onboarding-form textarea {
+  padding: 0.7em;
+  border-radius: 10px;
+  border: 1px solid #CCCCCC;
+  font-size: 1em;
+  font-family: 'Montserrat Alternates', 'Montserrat', sans-serif;
+  background: #FFFFEF;
+  box-shadow: 0 1px 4px #4A4D3422;
+}
+.onboarding-form textarea {
+  min-height: 48px;
+  resize: vertical;
+}
+.onboarding-form button {
+  margin-top: 1em;
+  padding: 0.8em 2em;
+  font-size: 1.1em;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(90deg, #7B8057 60%, #4A4D34 100%);
+  color: #FFFFEF;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 2px 8px #4A4D3422;
+  transition: background 0.2s, color 0.2s;
+}
+.onboarding-form button:hover {
+  background: linear-gradient(90deg, #4A4D34 60%, #7B8057 100%);
+  color: #FFD700;
+}
+.onboarding-success {
+  text-align: center;
+  margin-top: 2em;
+}
+.onboarding-success h3 {
+  font-size: 1.3em;
+  color: #4A4D34;
+  font-family: 'Montserrat Alternates', 'Montserrat', sans-serif;
+  font-weight: 700;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  body {
+    padding: 0.5rem;
+  }
+  .glass-card {
+    max-width: 98vw;
+    margin: 1rem auto;
+  }
+}
+/* ...existing code... */
+/* Onboarding Styles */
+.onboarding-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8em;
+  margin-top: 1em;
+}
+.onboarding-form input,
+.onboarding-form select,
+.onboarding-form textarea {
+  padding: 0.7em;
+  border-radius: 10px;
+  border: 1px solid #CCCCCC;
+  font-size: 1em;
+  font-family: 'Montserrat Alternates', 'Montserrat', sans-serif;
+  background: #FFFFEF;
+  box-shadow: 0 1px 4px #4A4D3422;
+}
+.onboarding-form textarea {
+  min-height: 48px;
+  resize: vertical;
+}
+.onboarding-form button {
+  margin-top: 1em;
+  padding: 0.8em 2em;
+  font-size: 1.1em;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(90deg, #7B8057 60%, #4A4D34 100%);
+  color: #FFFFEF;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 2px 8px #4A4D3422;
+  transition: background 0.2s, color 0.2s;
+}
+.onboarding-form button:hover {
+  background: linear-gradient(90deg, #4A4D34 60%, #7B8057 100%);
+  color: #FFD700;
+}
+.onboarding-success {
+  text-align: center;
+  margin-top: 2em;
+}
+.onboarding-success h3 {
+  font-size: 1.3em;
+  color: #4A4D34;
+  font-family: 'Montserrat Alternates', 'Montserrat', sans-serif;
+  font-weight: 700;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  body {
+    padding: 0.5rem;
+  }
+  .glass-card {
+    max-width: 98vw;
+    margin: 1rem auto;
+    padding: 1.2rem 0.5rem;
+    border-radius: 16px;
+    font-size: 0.98em;
+  }
+  .navbar {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.7rem 0.2rem;
+    font-size: 0.98em;
+    border-radius: 10px;
+  }
+  .navbar a {
+    padding: 0.5em 0.7em;
+    font-size: 0.98em;
+    border-radius: 8px;
+  }
+  .main-content {
+    min-height: 60vh;
+    padding: 0.2rem;
+  }
+  .login {
+    margin-top: 2.5rem;
+  }
+  .login h1 {
+    font-size: 2em;
+  }
+  .login button {
+    padding: 0.7em 1.2em;
+    font-size: 1em;
+    border-radius: 8px;
+  }
+  .sacred-dialog h2,
+  .living-journal h2,
+  .meditate-with-me h2,
+  .daily-ritual h2,
+  .inner-map h2 {
+    font-size: 1.1em;
+    margin-bottom: 0.7em;
+  }
+  .sacred-dialog .chat-window,
+  .living-journal .journal-form textarea,
+  .journal-entry,
+  .meditate-with-me .instructions,
+  .progress-item {
+    font-size: 0.98em;
+  }
+  .timer-circle {
+    width: 90px;
+    height: 90px;
+  }
+  .timer-controls button {
+    width: 36px;
+    height: 36px;
+    font-size: 1em;
+  }
+  .progress-bar {
+    height: 14px;
+    border-radius: 8px;
+    width: 95%;
+  }
+  .daily-ritual .ritual-list li,
+  .journal-entry {
+    padding: 0.5em;
+    font-size: 0.98em;
+  }
+}
+
+body {
+  background: linear-gradient(120deg, #F8F0E2 0%, #FFFFEF 100%);
+  font-family: 'Montserrat Alternates', 'Montserrat', sans-serif;
+  color: #4A4D34;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+* {
+  font-family: 'Montserrat Alternates', 'Montserrat', sans-serif !important;
+  box-sizing: border-box;
+}
+
+.glass-card {
+  background: rgba(255,255,239,0.92);
+  border-radius: 24px;
+  box-shadow: 0 12px 32px 0 rgba(74,77,52,0.18), 0 1.5px 8px 0 rgba(123,128,87,0.10);
+  backdrop-filter: blur(16px) saturate(120%);
+  border: 1.5px solid #CECECE;
+  padding: 2.5rem 2rem;
+  margin: 2.5rem auto;
+  max-width: 500px;
+  animation: fadeIn 1s;
+  transition: box-shadow 0.3s, background 0.3s;
+}
+.glass-card:hover {
+  box-shadow: 0 20px 40px 0 rgba(74,77,52,0.22), 0 2px 12px 0 rgba(123,128,87,0.14);
+  background: rgba(255,255,239,0.97);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
+  background: rgba(123,128,87,0.92);
+  border-radius: 16px;
+  margin-bottom: 2.5rem;
+  padding: 1.2rem 1rem;
+  box-shadow: 0 4px 16px 0 rgba(74,77,52,0.10);
+  backdrop-filter: blur(8px);
+}
+.navbar a {
+  color: #FFFFEF;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.08em;
+  padding: 0.7em 1.2em;
+  border-radius: 10px;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  letter-spacing: 0.02em;
+}
+.navbar a:hover {
+  background: #4A4D34;
+  color: #FFD700;
+  box-shadow: 0 2px 8px #4A4D3422;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 70vh;
+}
+
+.login {
+  text-align: center;
+  margin-top: 7rem;
+}
+.login h1 {
+  font-size: 3em;
+  color: #4A4D34;
+  margin-bottom: 0.2em;
+  font-family: 'Montserrat Alternates', 'Montserrat', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.login p {
+  font-size: 1.2em;
+  color: #7B8057;
+  margin-bottom: 2em;
+}
+.login button {
+  margin: 0.7em;
+  padding: 0.9em 2.2em;
+  font-size: 1.15em;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(90deg, #7B8057 60%, #4A4D34 100%);
+  color: #FFFFEF;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #4A4D3422;
+  font-weight: 600;
+  transition: background 0.2s, color 0.2s;
+}
+.login button:hover {
+  background: linear-gradient(90deg, #4A4D34 60%, #7B8057 100%);
+  color: #FFD700;
+}
+.guest-msg {
+  margin-top: 1em;
+  color: #7B8057;
+  font-size: 1.1em;
+}
+
+/* Diálogo Sagrado */
+.sacred-dialog h2 {
+  font-family: 'Montserrat Alternates', 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.5em;
+  color: #4A4D34;
+  margin-bottom: 1em;
+}
+.sacred-dialog .chat-window {
+  min-height: 120px;
+  max-height: 220px;
+  overflow-y: auto;
+  margin-bottom: 1em;
+  background: #F8F0E2;
+  border-radius: 12px;
+  padding: 1em;
+  box-shadow: 0 2px 8px #4A4D3422;
+}
+.msg-ia {
+  text-align: left;
+  color: #7B8057;
+  margin-bottom: 0.5em;
+  font-weight: 500;
+}
+.msg-user {
+  text-align: right;
+  color: #4A4D34;
+  margin-bottom: 0.5em;
+  font-weight: 500;
+}
+.chat-input {
+  display: flex;
+  gap: 0.5em;
+}
+.chat-input input {
+  flex: 1;
+  padding: 0.5em;
+  border-radius: 10px;
+  border: 1px solid #CCCCCC;
+  font-size: 1em;
+}
+.chat-input button {
+  padding: 0.5em 1.2em;
+  border-radius: 10px;
+  border: none;
+  background: #7B8057;
+  color: #FFFFEF;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.chat-input button:hover {
+  background: #4A4D34;
+  color: #FFD700;
+}
+
+/* Diario Vivo */
+.living-journal h2 {
+  font-family: 'Montserrat Alternates', 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.5em;
+  color: #4A4D34;
+  margin-bottom: 1em;
+}
+.living-journal .journal-form textarea {
+  width: 100%;
+  min-height: 60px;
+  border-radius: 10px;
+  border: 1px solid #CCCCCC;
+  margin-bottom: 0.5em;
+  padding: 0.5em;
+  font-size: 1em;
+}
+.journal-controls {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+}
+.journal-controls select {
+  border-radius: 10px;
+  padding: 0.3em;
+  font-size: 1em;
+}
+.journal-controls .fav-active {
+  color: #FFD700;
+}
+.journal-filters {
+  margin: 1em 0;
+}
+.journal-filters select {
+  border-radius: 10px;
+  padding: 0.3em;
+  font-size: 1em;
+}
+.journal-entries {
+  margin-top: 1em;
+}
+.journal-entry {
+  background: #FFFFEF;
+  border-radius: 12px;
+  margin-bottom: 0.7em;
+  padding: 0.7em;
+  box-shadow: 0 2px 8px #4A4D3422;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1em;
+}
+.journal-meta {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+}
+
+/* Medita Conmigo */
+.meditate-with-me h2 {
+  font-family: 'Montserrat Alternates', 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.5em;
+  color: #4A4D34;
+  margin-bottom: 1em;
+}
+.meditate-with-me .meditation-select {
+  margin-bottom: 1em;
+}
+.meditate-with-me .instructions {
+  margin-top: 0.5em;
+  color: #7B8057;
+  font-size: 1.1em;
+}
+.timer-circle {
+  margin: 1em auto;
+  width: 120px;
+  height: 120px;
+  position: relative;
+}
+.timer-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.7em;
+  margin-top: 1em;
+}
+.timer-controls button {
+  background: #7B8057;
+  color: #FFFFEF;
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  font-size: 1.15em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px #4A4D3422;
+  transition: background 0.2s, color 0.2s;
+}
+.timer-controls button svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+  margin: auto;
+  color: #FFFFEF;
+  fill: #FFFFEF;
+  stroke: #FFFFEF;
+}
+.timer-controls button:hover {
+  background: #4A4D34;
+  color: #FFD700;
+}
+
+/* Ritual Diario */
+.daily-ritual h2 {
+  font-family: 'Montserrat Alternates', 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.5em;
+  color: #4A4D34;
+  margin-bottom: 1em;
+}
+.daily-ritual .ritual-list {
+  list-style: none;
+  padding: 0;
+}
+.daily-ritual .ritual-list li {
+  background: #FFFFEF;
+  border-radius: 12px;
+  margin-bottom: 0.5em;
+  padding: 0.7em;
+  box-shadow: 0 2px 8px #4A4D3422;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 1em;
+  transition: background 0.2s, color 0.2s;
+}
+.daily-ritual .ritual-list li.ritual-done {
+  text-decoration: line-through;
+  color: #7B8057;
+  background: #F8F0E2;
+}
+.daily-ritual .ritual-list li:hover {
+  background: #F8F0E2;
+  color: #4A4D34;
+}
+
+/* Mapa Interior */
+.inner-map h2 {
+  font-family: 'Montserrat Alternates', 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.5em;
+  color: #4A4D34;
+  margin-bottom: 1em;
+}
+.inner-map .progress-list {
+  margin-top: 1em;
+}
+.progress-item {
+  margin-bottom: 1em;
+  font-size: 1em;
+}
+.progress-bar {
+  background: #CECECE;
+  border-radius: 12px;
+  height: 18px;
+  width: 80%;
+  margin: 0.5em auto;
+  position: relative;
+  box-shadow: 0 1px 4px #4A4D3422;
+}
+.progress-fill {
+  background: linear-gradient(90deg, #7B8057 60%, #4A4D34 100%);
+  height: 100%;
+  border-radius: 12px;
+  transition: width 0.5s;
+}
+
+.glass-card {
+  background: rgba(255,255,239,0.85);
+  border-radius: 18px;
+  box-shadow: 0 8px 32px 0 rgba(74,77,52,0.18);
+  backdrop-filter: blur(8px);
+  border: 1px solid #CECECE;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 480px;
+  animation: fadeIn 1s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.navbar {
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
+  background: #7B8057cc;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  padding: 1rem;
+}
+.navbar a {
+  color: #FFFFEF;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.5em 1em;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+.navbar a:hover {
+  background: #4A4D34;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login {
+  text-align: center;
+  margin-top: 6rem;
+}
+.login h1 {
+  font-size: 2.8em;
+  color: #4A4D34;
+  margin-bottom: 0.2em;
+}
+.login button {
+  margin: 0.5em;
+  padding: 0.7em 2em;
+  font-size: 1.1em;
+  border-radius: 8px;
+  border: none;
+  background: #7B8057;
+  color: #FFFFEF;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #4A4D3422;
+  transition: background 0.2s;
+}
+.login button:hover {
+  background: #4A4D34;
+}
+.guest-msg {
+  margin-top: 1em;
+  color: #7B8057;
+}
+
+/* Diálogo Sagrado */
+.sacred-dialog .chat-window {
+  min-height: 120px;
+  max-height: 220px;
+  overflow-y: auto;
+  margin-bottom: 1em;
+  background: #F8F0E2;
+  border-radius: 8px;
+  padding: 1em;
+}
+.msg-ia {
+  text-align: left;
+  color: #7B8057;
+  margin-bottom: 0.5em;
+}
+.msg-user {
+  text-align: right;
+  color: #4A4D34;
+  margin-bottom: 0.5em;
+}
+.chat-input {
+  display: flex;
+  gap: 0.5em;
+}
+.chat-input input {
+  flex: 1;
+  padding: 0.5em;
+  border-radius: 8px;
+  border: 1px solid #CCCCCC;
+}
+.chat-input button {
+  padding: 0.5em 1.2em;
+  border-radius: 8px;
+  border: none;
+  background: #7B8057;
+  color: #FFFFEF;
+  cursor: pointer;
+}
+
+/* Diario Vivo */
+.living-journal .journal-form textarea {
+  width: 100%;
+  min-height: 60px;
+  border-radius: 8px;
+  border: 1px solid #CCCCCC;
+  margin-bottom: 0.5em;
+  padding: 0.5em;
+}
+.journal-controls {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+}
+.journal-controls select {
+  border-radius: 8px;
+  padding: 0.3em;
+}
+.journal-controls .fav-active {
+  color: #FFD700;
+}
+.journal-filters {
+  margin: 1em 0;
+}
+.journal-entries {
+  margin-top: 1em;
+}
+.journal-entry {
+  background: #FFFFEF;
+  border-radius: 8px;
+  margin-bottom: 0.7em;
+  padding: 0.7em;
+  box-shadow: 0 2px 8px #4A4D3422;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.journal-meta {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+}
+
+/* Medita Conmigo */
+.meditate-with-me .meditation-select {
+  margin-bottom: 1em;
+}
+.meditate-with-me .instructions {
+  margin-top: 0.5em;
+  color: #7B8057;
+}
+.timer-circle {
+  margin: 1em auto;
+  width: 120px;
+  height: 120px;
+  position: relative;
+}
+.timer-controls {
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  margin-top: 1em;
+}
+.timer-controls button {
+  background: #7B8057;
+  color: #FFFFEF;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+/* Ritual Diario */
+.daily-ritual .ritual-list {
+  list-style: none;
+  padding: 0;
+}
+.daily-ritual .ritual-list li {
+  background: #FFFFEF;
+  border-radius: 8px;
+  margin-bottom: 0.5em;
+  padding: 0.7em;
+  box-shadow: 0 2px 8px #4A4D3422;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.daily-ritual .ritual-list li.ritual-done {
+  text-decoration: line-through;
+  color: #7B8057;
+  background: #F8F0E2;
+}
+
+/* Mapa Interior */
+.inner-map .progress-list {
+  margin-top: 1em;
+}
+.progress-item {
+  margin-bottom: 1em;
+}
+.progress-bar {
+  background: #CECECE;
+  border-radius: 8px;
+  height: 16px;
+  width: 80%;
+  margin: 0.5em auto;
+  position: relative;
+}
+.progress-fill {
+  background: #7B8057;
+  height: 100%;
+  border-radius: 8px;
+  transition: width 0.5s;
+}
