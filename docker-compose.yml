@@ -1,6 +1,6 @@
 services:
   becalm-frontend:
-    build: ./becalm-frontend
+    build: ./
     ports:
       - "8033:8033"
     labels:
