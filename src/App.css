@@ -433,6 +433,7 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
+
 .navbar {
   position: sticky;
   top: 0;
@@ -440,12 +441,18 @@ body {
   display: flex;
   gap: 1.2rem;
   justify-content: center;
-  background: rgba(123,128,87,0.92);
-  border-radius: 16px;
+  background: rgba(123,128,87,0.82);
+  border-radius: 18px;
   margin-bottom: 2.5rem;
   padding: 1.2rem 1rem;
-  box-shadow: 0 4px 16px 0 rgba(74,77,52,0.10);
-  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 32px 0 rgba(74,77,52,0.13), 0 1.5px 8px 0 rgba(123,128,87,0.10);
+  backdrop-filter: blur(18px) saturate(120%);
+  border: 1.5px solid #CECECE;
+  transition: box-shadow 0.3s, background 0.3s;
+}
+.navbar:hover {
+  box-shadow: 0 16px 40px 0 rgba(74,77,52,0.18), 0 2px 12px 0 rgba(123,128,87,0.14);
+  background: rgba(123,128,87,0.92);
 }
 .navbar a {
   color: #FFFFEF;
@@ -453,14 +460,20 @@ body {
   font-weight: 700;
   font-size: 1.08em;
   padding: 0.7em 1.2em;
-  border-radius: 10px;
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  border-radius: 12px;
+  transition: background 0.25s, color 0.25s, box-shadow 0.25s, border 0.25s;
   letter-spacing: 0.02em;
+  border: 1.2px solid transparent;
+  box-shadow: 0 1px 6px 0 rgba(74,77,52,0.08);
+  backdrop-filter: blur(4px);
+  opacity: 0.96;
 }
-.navbar a:hover {
-  background: #4A4D34;
+.navbar a.active, .navbar a:focus, .navbar a:hover {
+  background: rgba(74,77,52,0.92);
   color: #FFD700;
-  box-shadow: 0 2px 8px #4A4D3422;
+  border: 1.2px solid #FFD70044;
+  box-shadow: 0 2px 12px #4A4D3422;
+  opacity: 1;
 }
 
 .main-content {
