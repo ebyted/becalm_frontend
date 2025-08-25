@@ -1,4 +1,4 @@
-import React from 'react';
+
 import '../App.css';
 
 import mensajeIcon from '../assets/05mensaje_del_alma.svg';

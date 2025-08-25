@@ -1,4 +1,4 @@
-import React from 'react';
+
 import '../App.css';
 
 import mapaIcon from '../assets/03mapa_interior.svg';

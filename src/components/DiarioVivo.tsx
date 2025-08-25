@@ -1,4 +1,4 @@
-import React from 'react';
+
 import '../App.css';
 
 import diarioIcon from '../assets/02diario_vivo.svg';

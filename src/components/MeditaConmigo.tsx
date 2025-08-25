@@ -1,4 +1,4 @@
-import React from 'react';
+
 import '../App.css';
 
 import meditaIcon from '../assets/02diario_vivo.svg';

@@ -1,4 +1,4 @@
-import React from 'react';
+
 import '../App.css';
 
 import ritualIcon from '../assets/04ritual_diario.svg';

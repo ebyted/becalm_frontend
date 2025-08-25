@@ -1,6 +1,6 @@
 
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import activacionIcon from './assets/react.svg';
 import diarioIcon from './assets/02diario_vivo.svg';
 import dialogoIcon from './assets/01dialogo_sagrado.svg';
@@ -9,7 +9,7 @@ import ritualIcon from './assets/04ritual_diario.svg';
 import mapaIcon from './assets/03mapa_interior.svg';
 import silencioIcon from './assets/07silencio_sagrado.svg';
 import meditaIcon from './assets/06medita_conmigo.svg';
-import { BrowserRouter, Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import { ActivacionLlave } from './components/ActivacionLlave';
 import { DiarioVivo } from './components/DiarioVivo';
 import { MeditaConmigo } from './components/MeditaConmigo';
