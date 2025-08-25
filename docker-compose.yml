@@ -1,8 +1,9 @@
 version: '3.8'
 services:
   becalm-frontend:
-    build: .
+    build: ./becalm-frontend
     ports:
       - "8033:8033"
-    restart: unless-stopped
-    container_name: becalm_frontend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.becalm-frontend.rule=Host(`becalm-api.arkano-ia.com`)"
