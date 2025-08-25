@@ -20,7 +20,12 @@ export function SacredDialog() {
   };
 
   return (
-    <div className="glass-card dialogo-sagrado" style={{maxWidth:'480px',padding:'2em',overflowY:'auto'}}>
+    <div className="glass-card dialogo-sagrado" style={{
+      maxWidth: '480px',
+      padding: '2em',
+      overflowY: 'auto',
+      boxSizing: 'border-box'
+    }}>
       <img src={dialogoIcon} alt="Diálogo Sagrado" style={{width:'48px',height:'48px',marginBottom:'0.5em'}} />
       <h2 style={{fontSize:'2em'}}>Diálogo Sagrado</h2>
       <div className="mensajes" style={{margin:'1.5em 0',minHeight:'120px'}}>
@@ -38,15 +43,40 @@ export function SacredDialog() {
           }}>{msg.text}</div>
         ))}
       </div>
-      <form onSubmit={handleSend} style={{display:'flex',gap:'0.7em'}}>
+      <form onSubmit={handleSend} style={{
+        display: 'flex',
+        gap: '0.7em',
+        flexWrap: 'wrap',
+        width: '100%',
+        boxSizing: 'border-box'
+      }}>
         <input
           type="text"
           value={input}
           onChange={e => setInput(e.target.value)}
           placeholder="Escribe aquí..."
-          style={{flex:1,fontSize:'1.15em',padding:'0.8em',borderRadius:'10px'}}
+          style={{
+            flex: '1 1 180px',
+            fontSize: '1.15em',
+            padding: '0.8em',
+            borderRadius: '10px',
+            minWidth: '0',
+            maxWidth: '100%'
+          }}
         />
-        <button type="submit" className="btn-main" style={{fontSize:'1.15em',padding:'0.8em 1.5em',borderRadius:'10px'}}>Enviar</button>
+        <button
+          type="submit"
+          className="btn-main"
+          style={{
+            fontSize: '1.15em',
+            padding: '0.8em 1.5em',
+            borderRadius: '10px',
+            flex: '0 0 auto',
+            maxWidth: '100%'
+          }}
+        >
+          Enviar
+        </button>
       </form>
     </div>
   );
