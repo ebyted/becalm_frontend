@@ -6,8 +6,12 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.becalm-frontend.rule=Host(`becalm-api.arkano-ia.com`)"
-      - "traefik.http.routers.becalm-frontend.entrypoints=web"
       - "traefik.http.services.becalm-frontend.loadbalancer.server.port=8033"
-      # Si usas HTTPS, agrega estas líneas:
       - "traefik.http.routers.becalm-frontend.entrypoints=websecure"
       - "traefik.http.routers.becalm-frontend.tls.certresolver=letsencrypt"
+    networks:
+      - dokploy-network
+
+networks:
+  dokploy-network:
+    external: true
