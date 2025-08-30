@@ -2,31 +2,38 @@
 import React, { useState } from 'react';
 import '../App.css';
 
+const defaultForm = {
+  nombre: 'Edgar Antonio',
+  ap: 'Jimenez',
+  am: 'Salas',
+  fechaNac: '1978-11-22',
+  horaNac: '07:40',
+  ciudadNac: 'Tijuana',
+  paisNac: 'Mexico',
+  genero: '',
+  email: '',
+  telefono: '',
+  intereses: '',
+  objetivo: '',
+};
+
 export function Onboarding() {
-  const [form, setForm] = useState({
-    nombre: '',
-    ap: '',
-    am: '',
-    fechaNac: '',
-    horaNac: '',
-    ciudadNac: '',
-    paisNac: '',
-    genero: '',
-    email: '',
-    telefono: '',
-    intereses: '',
-    objetivo: '',
+  const [form, setForm] = useState(() => {
+    const saved = localStorage.getItem('becalm_onboarding');
+    return saved ? JSON.parse(saved) : defaultForm;
   });
   const [submitted, setSubmitted] = useState(false);
   const [tab, setTab] = useState(0);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    localStorage.setItem('becalm_onboarding', JSON.stringify({ ...form, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
+    localStorage.setItem('becalm_onboarding', JSON.stringify(form));
   };
 
   const nextTab = () => setTab((t) => Math.min(t + 1, 2));

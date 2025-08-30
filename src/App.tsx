@@ -10,6 +10,7 @@ import mapaIcon from './assets/03mapa_interior.svg';
 import silencioIcon from './assets/07silencio_sagrado.svg';
 import meditaIcon from './assets/06medita_conmigo.svg';
 import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
+import { Onboarding } from './components/Onboarding';
 import { ActivacionLlave } from './components/ActivacionLlave';
 import { DiarioVivo } from './components/DiarioVivo';
 import { MeditaConmigo } from './components/MeditaConmigo';
@@ -46,6 +47,7 @@ function Navbar() {
       {open && (
         <div style={{position:'absolute',top:'100%',right:0,zIndex:10,background:'#FFFFEF',boxShadow:'0 4px 24px #7B805733',borderRadius:'0 0 16px 16px',padding:'1em 0.5em',minWidth:'220px'}}>
           <Link to="/" onClick={()=>setOpen(false)} style={{display:'block',padding:'0.7em 1em',color:'#7B8057',fontWeight:'bold'}}>Inicio</Link>
+          <Link to="/onboarding" onClick={()=>setOpen(false)} style={{display:'block',padding:'0.7em 1em',color:'#7B8057',fontWeight:'bold'}}>Onboarding</Link>
           <Link to="/activacion" onClick={()=>setOpen(false)} style={{display:'flex',alignItems:'center',padding:'0.7em 1em'}}><img src={activacionIcon} alt="Activación" style={iconStyle}/>Activación de la llave</Link>
           <Link to="/dialogo" onClick={()=>setOpen(false)} style={{display:'flex',alignItems:'center',padding:'0.7em 1em'}}><img src={dialogoIcon} alt="Diálogo" style={iconStyle}/>Diálogo Sagrado</Link>
           <Link to="/diario" onClick={()=>setOpen(false)} style={{display:'flex',alignItems:'center',padding:'0.7em 1em'}}><img src={diarioIcon} alt="Diario Vivo" style={iconStyle}/>Diario Vivo</Link>
@@ -105,6 +107,7 @@ function App() {
       <div className="main-content">
         <Routes>
           <Route path="/" element={<HomeMenu />} />
+          <Route path="/onboarding" element={<Onboarding />} />
           <Route path="/activacion" element={<ActivacionLlave />} />
           <Route path="/dialogo" element={<SacredDialog />} />
           <Route path="/diario" element={<DiarioVivo />} />
