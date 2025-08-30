@@ -8,14 +8,32 @@ export function SacredDialog() {
   ]);
   const [input, setInput] = useState('');
 
-  const handleSend = (e: React.FormEvent) => {
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8034';
+  const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
     setMessages([...messages, { from: 'usuario', text: input }]);
-    // Simulación de respuesta canalizada
-    setTimeout(() => {
-      setMessages(msgs => [...msgs, { from: 'guia', text: 'Tu vibración ha sido recibida. El templo sostiene tu palabra.' }]);
-    }, 900);
+    // Obtener datos del usuario desde localStorage
+    let userData = {};
+    try {
+      userData = JSON.parse(localStorage.getItem('onboardingData') || '{}');
+    } catch {}
+    // Construir payload
+    const payload = {
+      ...userData,
+      mensaje: input
+    };
+    try {
+      const res = await fetch(`${BACKEND_URL}/dialogo`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      setMessages(msgs => [...msgs, { from: 'guia', text: data.respuesta || 'Respuesta recibida.' }]);
+    } catch (err) {
+      setMessages(msgs => [...msgs, { from: 'guia', text: 'Error al conectar con el backend.' }]);
+    }
     setInput('');
   };
 
