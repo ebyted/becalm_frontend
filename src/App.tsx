@@ -80,6 +80,7 @@ function HomeMenu() {
   const iconStyle = { width: '48px', height: '48px', marginBottom: '0.5em' };
   return (
     <div style={{display:'flex',flexWrap:'wrap',justifyContent:'center',gap:'1em',margin:'2em auto',maxWidth:'800px'}}>
+  <div style={cardStyle} onClick={()=>navigate('/onboarding')}><span style={{fontSize:'2em',marginBottom:'0.5em'}}>🧑‍💼</span>Onboarding</div>
       <div style={cardStyle} onClick={()=>navigate('/activacion')}><img src={activacionIcon} alt="Activación" style={iconStyle}/>Activación de la llave</div>
       <div style={cardStyle} onClick={()=>navigate('/dialogo')}><img src={dialogoIcon} alt="Diálogo" style={iconStyle}/>Diálogo Sagrado</div>
       <div style={cardStyle} onClick={()=>navigate('/diario')}><img src={diarioIcon} alt="Diario Vivo" style={iconStyle}/>Diario Vivo</div>
