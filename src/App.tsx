@@ -36,28 +36,22 @@ function Login({ onLogin }: { onLogin: () => void }) {
 
 
 function Navbar() {
-  const [open, setOpen] = useState(false);
   const iconStyle = { width: '28px', height: '28px', verticalAlign: 'middle', marginRight: '0.5em' };
   return (
-    <nav className="navbar glass-card" style={{position:'relative',padding:'0.7em 1em',display:'flex',alignItems:'center',justifyContent:'space-between'}}>
-      <span style={{fontWeight:'bold',fontSize:'1.3em',color:'#7B8057'}}>BECALM</span>
-      <button onClick={() => setOpen(!open)} style={{background:'none',border:'none',cursor:'pointer',padding:0}} aria-label="Menú">
-        <svg width="32" height="32" viewBox="0 0 32 32"><rect y="7" width="32" height="3" rx="2" fill="#7B8057"/><rect y="14" width="32" height="3" rx="2" fill="#7B8057"/><rect y="21" width="32" height="3" rx="2" fill="#7B8057"/></svg>
-      </button>
-      {open && (
-        <div style={{position:'absolute',top:'100%',right:0,zIndex:10,background:'#FFFFEF',boxShadow:'0 4px 24px #7B805733',borderRadius:'0 0 16px 16px',padding:'1em 0.5em',minWidth:'220px'}}>
-          <Link to="/" onClick={()=>setOpen(false)} style={{display:'block',padding:'0.7em 1em',color:'#7B8057',fontWeight:'bold'}}>Inicio</Link>
-          <Link to="/onboarding" onClick={()=>setOpen(false)} style={{display:'block',padding:'0.7em 1em',color:'#7B8057',fontWeight:'bold'}}>Onboarding</Link>
-          <Link to="/activacion" onClick={()=>setOpen(false)} style={{display:'flex',alignItems:'center',padding:'0.7em 1em'}}><img src={activacionIcon} alt="Activación" style={iconStyle}/>Activación de la llave</Link>
-          <Link to="/dialogo" onClick={()=>setOpen(false)} style={{display:'flex',alignItems:'center',padding:'0.7em 1em'}}><img src={dialogoIcon} alt="Diálogo" style={iconStyle}/>Diálogo Sagrado</Link>
-          <Link to="/diario" onClick={()=>setOpen(false)} style={{display:'flex',alignItems:'center',padding:'0.7em 1em'}}><img src={diarioIcon} alt="Diario Vivo" style={iconStyle}/>Diario Vivo</Link>
-          <Link to="/medita" onClick={()=>setOpen(false)} style={{display:'flex',alignItems:'center',padding:'0.7em 1em'}}><img src={meditaIcon} alt="Medita Conmigo" style={iconStyle}/>Medita Conmigo</Link>
-          <Link to="/mensajes" onClick={()=>setOpen(false)} style={{display:'flex',alignItems:'center',padding:'0.7em 1em'}}><img src={mensajesIcon} alt="Mensajes del Alma" style={iconStyle}/>Mensajes del Alma</Link>
-          <Link to="/ritual" onClick={()=>setOpen(false)} style={{display:'flex',alignItems:'center',padding:'0.7em 1em'}}><img src={ritualIcon} alt="Ritual Diario" style={iconStyle}/>Ritual Diario</Link>
-          <Link to="/mapa" onClick={()=>setOpen(false)} style={{display:'flex',alignItems:'center',padding:'0.7em 1em'}}><img src={mapaIcon} alt="Mapa Interior" style={iconStyle}/>Mapa Interior</Link>
-          <Link to="/silencio" onClick={()=>setOpen(false)} style={{display:'flex',alignItems:'center',padding:'0.7em 1em'}}><img src={silencioIcon} alt="Silencio Sagrado" style={iconStyle}/>Silencio Sagrado</Link>
-        </div>
-      )}
+    <nav className="navbar glass-card" style={{padding:'0.7em 1em',display:'flex',alignItems:'center',justifyContent:'space-between',flexWrap:'wrap'}}>
+      <span style={{fontWeight:'bold',fontSize:'1.3em',color:'#7B8057',marginRight:'2em'}}>BECALM</span>
+      <div style={{display:'flex',gap:'1em',flexWrap:'wrap'}}>
+        <Link to="/" style={{color:'#7B8057',fontWeight:'bold',padding:'0.7em 1em'}}>Inicio</Link>
+        <Link to="/onboarding" style={{color:'#7B8057',fontWeight:'bold',padding:'0.7em 1em'}}>Onboarding</Link>
+        <Link to="/activacion" style={{display:'flex',alignItems:'center',padding:'0.7em 1em'}}><img src={activacionIcon} alt="Activación" style={iconStyle}/>Activación de la llave</Link>
+        <Link to="/dialogo" style={{display:'flex',alignItems:'center',padding:'0.7em 1em'}}><img src={dialogoIcon} alt="Diálogo" style={iconStyle}/>Diálogo Sagrado</Link>
+        <Link to="/diario" style={{display:'flex',alignItems:'center',padding:'0.7em 1em'}}><img src={diarioIcon} alt="Diario Vivo" style={iconStyle}/>Diario Vivo</Link>
+        <Link to="/medita" style={{display:'flex',alignItems:'center',padding:'0.7em 1em'}}><img src={meditaIcon} alt="Medita Conmigo" style={iconStyle}/>Medita Conmigo</Link>
+        <Link to="/mensajes" style={{display:'flex',alignItems:'center',padding:'0.7em 1em'}}><img src={mensajesIcon} alt="Mensajes del Alma" style={iconStyle}/>Mensajes del Alma</Link>
+        <Link to="/ritual" style={{display:'flex',alignItems:'center',padding:'0.7em 1em'}}><img src={ritualIcon} alt="Ritual Diario" style={iconStyle}/>Ritual Diario</Link>
+        <Link to="/mapa" style={{display:'flex',alignItems:'center',padding:'0.7em 1em'}}><img src={mapaIcon} alt="Mapa Interior" style={iconStyle}/>Mapa Interior</Link>
+        <Link to="/silencio" style={{display:'flex',alignItems:'center',padding:'0.7em 1em'}}><img src={silencioIcon} alt="Silencio Sagrado" style={iconStyle}/>Silencio Sagrado</Link>
+      </div>
     </nav>
   );
 }
