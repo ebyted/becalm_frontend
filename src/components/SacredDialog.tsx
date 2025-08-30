@@ -3,15 +3,6 @@ import dialogoIcon from '../assets/01dialogo_sagrado.svg';
 import '../App.css';
 
 export function SacredDialog() {
-  // Ref para scroll automático
-  const mensajesEndRef = React.useRef<HTMLDivElement>(null);
-  const [messages, setMessages] = useState(initialMessages);
-  const [input, setInput] = useState('');
-  React.useEffect(() => {
-    if (mensajesEndRef.current) {
-      mensajesEndRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [messages]);
   // Cargar historial de mensajes desde localStorage o iniciar con el mensaje inicial
   const initialMessages = (() => {
     try {
@@ -22,8 +13,15 @@ export function SacredDialog() {
       { from: 'guia', text: 'Este es tu espacio de reencuentro interior. Escribe lo que tu alma quiera expresar.' }
     ];
   })();
+  // Ref para scroll automático
+  const mensajesEndRef = React.useRef<HTMLDivElement>(null);
   const [messages, setMessages] = useState(initialMessages);
   const [input, setInput] = useState('');
+  React.useEffect(() => {
+    if (mensajesEndRef.current) {
+      mensajesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages]);
 
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8034';
   const handleSend = async (e: React.FormEvent) => {
