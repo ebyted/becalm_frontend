@@ -14,14 +14,17 @@ export function SacredDialog() {
     if (!input.trim()) return;
     setMessages([...messages, { from: 'usuario', text: input }]);
     // Obtener datos del usuario desde localStorage
-    let userData = {};
+    let userData: Record<string, any> = {};
     try {
       userData = JSON.parse(localStorage.getItem('onboardingData') || '{}');
     } catch {}
-    // Construir payload
+    // Construir payload con los campos requeridos
     const payload = {
-      ...userData,
-      mensaje: input
+      mensaje: input,
+      nombre: userData['nombre'] || '',
+      fecha_nacimiento: userData['fecha_nacimiento'] || userData['nacimiento'] || '',
+      hora_nacimiento: userData['hora_nacimiento'] || userData['hora'] || '',
+      lugar_nacimiento: userData['lugar_nacimiento'] || userData['lugar'] || ''
     };
     try {
       const res = await fetch(`${BACKEND_URL}/dialogo`, {
