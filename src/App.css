@@ -441,12 +441,12 @@ body {
   display: flex;
   gap: 1.2rem;
   justify-content: center;
-  background: rgba(123,128,87,0.82);
+  background: rgba(255,255,239,0.85);
   border-radius: 18px;
-  margin-bottom: 2.5rem;
-  padding: 1.2rem 1rem;
+  margin-bottom: 2rem;
+  padding: 1.1rem 1rem;
   box-shadow: 0 8px 32px 0 rgba(74,77,52,0.13), 0 1.5px 8px 0 rgba(123,128,87,0.10);
-  backdrop-filter: blur(18px) saturate(120%);
+  backdrop-filter: blur(16px) saturate(120%);
   border: 1.5px solid #CECECE;
   transition: box-shadow 0.3s, background 0.3s;
 }
@@ -777,6 +777,9 @@ body {
 
 
 .navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   display: flex;
   gap: 1.2rem;
   justify-content: center;
@@ -788,6 +791,9 @@ body {
   backdrop-filter: blur(16px) saturate(120%);
   border: 1.5px solid #CECECE;
   transition: box-shadow 0.3s, background 0.3s;
+}
+.navbar:hover {
+  background: rgba(123,128,87,0.92);
 }
 .navbar a {
   color: #4A4D34;
